@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   subject { described_class.new(
     email: 'test@boardgamesexchange.com',
     password: 'password',
+    is_admin: true
   )}
   context 'validations' do
     it 'is valid with valid attributes' do 
