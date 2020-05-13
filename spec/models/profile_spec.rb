@@ -4,7 +4,7 @@ RSpec.describe Profile, type: :model do
   let(:user) { User.new }
   subject { described_class.new(
     username: 'test',
-    rating: 450,
+    rating: 400,
     user: user
   )}
   context 'associations' do
