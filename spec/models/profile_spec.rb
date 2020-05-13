@@ -18,7 +18,6 @@ RSpec.describe Profile, type: :model do
     it 'is valid with valid attributes' do 
       expect(subject).to be_valid
     end
-  end
 
     it 'is not valid without a username' do
       subject.username = nil
@@ -27,6 +26,7 @@ RSpec.describe Profile, type: :model do
 
     it 'is not valid with non unique username' do
       # TODO
+      pending "add some examples to (or delete) #{__FILE__}"
     end
 
     it 'is not valid with rating below 100' do
@@ -41,5 +41,7 @@ RSpec.describe Profile, type: :model do
 
     it 'is calculating average rating' do
       # TODO
+      pending "add some examples to (or delete) #{__FILE__}"
     end
+  end
 end
