@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_083249) do
     t.integer "price"
     t.string "board_game_trade"
     t.text "description"
-    t.boolean "completed"
+    t.boolean "completed", default: false
     t.bigint "profile_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

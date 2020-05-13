@@ -9,7 +9,7 @@ RSpec.describe Listing, type: :model do
     price: 10000,
     board_game_trade: nil,
     description: "Awesome game",
-    completed: false,
+    completed: true,
     profile: profile
   )}
 
@@ -43,6 +43,11 @@ RSpec.describe Listing, type: :model do
     it 'is not valid without completed status' do
       subject.completed = nil
       expect(subject).to_not be_valid
+    end
+
+    it 'should default completed to false' do
+      new_listing = Listing.new()
+      expect(new_listing.completed).to eq false
     end
 
     it 'is not valid if listing type is money and price is nil' do
