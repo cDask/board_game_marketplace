@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_002812) do
+ActiveRecord::Schema.define(version: 2020_05_14_034641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "author_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id", "receiver_id"], name: "index_conversations_on_author_id_and_receiver_id", unique: true
+    t.index ["author_id"], name: "index_conversations_on_author_id"
+    t.index ["receiver_id"], name: "index_conversations_on_receiver_id"
+  end
 
   create_table "listing_payments", force: :cascade do |t|
     t.bigint "listing_id", null: false
@@ -36,6 +46,16 @@ ActiveRecord::Schema.define(version: 2020_05_14_002812) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_listings_on_profile_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.text "body"
+    t.bigint "profile_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["profile_id"], name: "index_messages_on_profile_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -80,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_05_14_002812) do
   add_foreign_key "listing_payments", "listings"
   add_foreign_key "listing_payments", "payments"
   add_foreign_key "listings", "profiles"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "profiles"
   add_foreign_key "profiles", "users"
   add_foreign_key "transactions", "listings"
   add_foreign_key "transactions", "profiles"
