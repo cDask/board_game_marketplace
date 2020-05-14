@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/', to: 'listings#index'
   root to: "listings#index"
   devise_for :users
   resources :listings
