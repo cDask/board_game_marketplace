@@ -20,4 +20,14 @@ class Listing < ApplicationRecord
     ],
     message: '%<value> is not a valid listing type'
   }
+  validates :price, presence: true, if: :listing_money?
+  validates :board_game_trade, presence: true, if: :listing_trade?
+
+  def listing_money?
+    listing_type == 'Money'
+  end
+
+  def listing_trade?
+    listing_type == 'Trade'
+  end
 end
