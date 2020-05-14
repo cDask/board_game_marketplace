@@ -28,18 +28,18 @@ RSpec.describe Conversation, type: :model do
 
     it 'is not valid without an author' do
       subject.author_id = nil
-      expect(subject).t_not be_valid
+      expect(subject).to_not be_valid
     end
 
     it 'is not valid without an reciever' do
       subject.receiver_id = nil
-      expect(subject).t_not be_valid
+      expect(subject).to_not be_valid
     end
 
     it 'is not valid with author_id and reciever_id is the same' do
       subject.author_id = 1
-      subject.reciever_id = 2
-      expect(subject).t_not be_valid
+      subject.receiver_id = 1
+      expect(subject).to_not be_valid
     end
   end
 end

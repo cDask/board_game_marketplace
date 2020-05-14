@@ -10,7 +10,7 @@ RSpec.describe Message, type: :model do
   )}
   context 'associations' do
     it 'belongs to a conversation' do
-      relation = Messsage.reflect_on_association(:conversation)
+      relation = Message.reflect_on_association(:conversation)
       expect(relation.macro).to eql(:belongs_to)
     end
 
@@ -27,7 +27,7 @@ RSpec.describe Message, type: :model do
 
     it 'is not valid without a message body' do
       subject.body = nil
-      expect(subject).t_not be_valid
+      expect(subject).to_not be_valid
     end
   end
 end
