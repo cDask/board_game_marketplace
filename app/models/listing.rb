@@ -1,5 +1,8 @@
 class Listing < ApplicationRecord
   belongs_to :profile
+  has_many :transactions
+  has_many :listing_payments
+  has_many :payments, through: :listing_payments
   validates :board_game_name,
             :condition,
             :listing_type,
