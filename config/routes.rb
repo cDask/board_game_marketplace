@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: "listings#index"
   devise_for :users
-  resources :profiles, only: [:index]
+  resources :profiles, only: [:index, :show]
   resources :listings
   resources :messages, only: [ :new, :create]
   resources :conversations, only: [:index, :show]
