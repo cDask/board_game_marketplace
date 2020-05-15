@@ -1,0 +1,27 @@
+<%= render "shared/form-errors", resource: listing %>
+
+<%= form_with model: listing, local: true, class: "listings-form" do |f| %>
+  <%= f.label :board_game_name %>
+  <%= f.text_field :board_game_name %>
+  <%= f.label :condition %>
+  <%= select(:listing, :condition, [
+      'Brand New in Shrink',
+      'Played a few times',
+      'Unplayed but punched',
+      'Missing pieces',
+      'Dented box',
+      'Heavily played'
+      ]) %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.label :listing_type %>
+  <%= f.select :listing_type, ['Money','Trade'] %>
+  <%= f.label :price %>
+  <%= f.number_field :price  %>
+  <%= f.label :board_game_trade %>
+  <%= f.text_field :board_game_trade %>
+  <%= f.label :picture %> 
+  <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
+  <%= hidden_field_tag 'listing[completed]', true %>
+  <%= f.submit %>
+<% end %>
