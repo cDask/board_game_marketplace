@@ -1,8 +1,13 @@
-<div>
-  Chatting with <%= conversation.with(current_user.profile).username %>
-  <br>
-  <em><%= conversation.messages.last.body.truncate(50) %></em>
-  <br>
-  <%= link_to 'View conversation', conversation_path(conversation) %>
-  <hr>
+<div class="single-conv">
+  <div class="profile-pic-sm">
+    <img src="http://movingkidsforward.org/wp-content/uploads/2013/05/profile_default800x600.jpg" alt="">
+  </div>
+
+  <div class="conv">
+    <div class="brief-conv">
+      <strong><%= conversation.with(current_user.profile).username %></strong>
+      <p><%= conversation.messages.last.profile.username %>: <em><%= conversation.messages.last.body.truncate(50) %></em></p>
+    </div>
+    <%= link_to 'View', conversation_path(conversation) %>
+  </div>
 </div>
