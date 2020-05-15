@@ -17,12 +17,12 @@ User.destroy_all
 puts 'DESTROYED ALL RECORDS'
 
 puts 'SEEDING'
-user = User.create(email: 'test@test.com', password: '12345678', is_admin: true)
+user = User.create(email: 'admin@bge.com', password: '12345678', is_admin: true)
 puts 'ADMIN SEEDED'
 profile = Profile.create(username: 'Admin',rating: 500,user_id: user.id)
 puts 'PROFILE CREATED'
 
-user2 = User.create(email: 'test@user.com', password: '12345678', is_admin: true)
+user2 = User.create(email: 'test@bge.com', password: '12345678')
 puts 'USER SEEDED'
 profile2 = Profile.create(username: 'Daniel',rating: 500,user_id: user2.id)
 puts 'PROFILE CREATED'

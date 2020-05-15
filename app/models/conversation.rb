@@ -1,7 +1,8 @@
 class Conversation < ApplicationRecord
   belongs_to :author, class_name: 'Profile'
   belongs_to :receiver, class_name: 'Profile'
-  validates :author, uniqueness: { scope: :receiver }
+  # validates :author_id, uniqueness: { scope: :receiver_id }
+  validate :author_and_receiver_unique
   has_many :messages,
            -> { order(created_at: :asc) },
            dependent: :destroy,
@@ -31,5 +32,16 @@ class Conversation < ApplicationRecord
 
   def participates?(user)
     [author, receiver].include?(user)
+  end
+
+  private
+
+  def author_and_receiver_unique
+    return unless author_id == receiver_id
+
+    errors.add(
+      :author_and_receiver_unique,
+      'Author and receiver cant be the same person'
+    )
   end
 end

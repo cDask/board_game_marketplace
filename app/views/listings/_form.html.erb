@@ -22,6 +22,5 @@
   <%= f.text_field :board_game_trade %>
   <%= f.label :picture %> 
   <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
-  <%= hidden_field_tag 'listing[completed]', true %>
   <%= f.submit %>
 <% end %>
