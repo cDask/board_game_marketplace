@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
     #   expect(subject).to_not be_valid
     # end
 
-    fit 'should default admin status to false' do
+    it 'should default admin status to false' do
       non_admin_subject = User.new()
       expect(non_admin_subject.is_admin).to eq false
     end

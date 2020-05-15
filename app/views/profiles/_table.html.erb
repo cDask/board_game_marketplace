@@ -1,18 +1,20 @@
 <table>
     <tr>
-        <th>Board Game Name</th>
+        <th>Board Game</th>
         <th>Condition</th>
         <th>List Type</th>
         <th>Price</th>
         <th>Board Game to Trade For</th>
+        <th>Actions</th>
     </tr>
     <% listings.each do |listing| %>
     <tr>
         <td><%= listing.board_game_name %></td>
         <td><%= listing.condition %></td>
-        <td><%= listing.list_type %></td>
-        <td><%= listing.price %></td>
+        <td><%= listing.listing_type %></td>
+        <td><%= number_to_currency(listing.price/100.0) %></td>
         <td><%= listing.board_game_trade %></td>
+        <td><%= link_to 'View', listing  %><%= link_to 'Edit', edit_listing_path %></td>
     </tr>
     <% end %>
 </table>

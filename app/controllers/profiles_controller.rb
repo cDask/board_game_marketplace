@@ -7,8 +7,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @active_listings = @profile.listings.find_by(completed: false)
-    @past_listings = @profile.listings.find_by(completed: true)
+    @listings = @profile.listings
+    @active_listings = @listings.reject(&:completed)
+    @past_listings = @listings.select(&:completed)
     @transactions = @profile.transactions
   end
 
