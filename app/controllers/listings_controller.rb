@@ -10,22 +10,30 @@ class ListingsController < ApplicationController
 
   def new
     @listing = Listing.new
+    @payments = Payment.all
   end
 
-  def edit; end
+  def edit
+    @payments = @listing.payments
+  end
 
   def create
     @listing = current_user.profile.listings.create(listing_params)
+    add_payments
     if @listing.errors.any?
       render :new
     else
       flash[:success] = 'You successfully created a new listing!'
-      redirect_to root_path
+      redirect_to @listing
     end
   end
 
   def update
     if @listing.update(listing_params)
+      # TODO: FIX PAYMENT UPDATES
+      params[payment_ids].each do |p|
+        @listing.payments << Payment.find_by(name: p)
+      end
       redirect_to @listing
     else
       render :edit
@@ -39,6 +47,14 @@ class ListingsController < ApplicationController
 
   private
 
+  def add_payments
+    return unless params[:payments]
+
+    payment_params[:name].each do |p|
+      @listing.payments << Payment.find_by(name: p)
+    end
+  end
+
   def listing_params
     params.require(
       :listing
@@ -47,6 +63,10 @@ class ListingsController < ApplicationController
       :price, :board_game_trade, :description,
       :completed, :profile, :picture, :completed
     )
+  end
+
+  def payment_params
+    params.require(:payments).permit(name: [])
   end
 
   def set_listing

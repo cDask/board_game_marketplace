@@ -4,7 +4,15 @@
 
 <h1><%= @listing.board_game_name %></h1>
 <p><%= @listing.description %></p>
-<p>Price: <%= number_to_currency(@listing.price / 100.0) %></p>
+<% if @listing.listing_type == 'Money' %>
+  <% @listing.payments.each do |p| %>
+    <%= label_tag p.name %>
+    <%= radio_button_tag 'payment', p.name%>
+  <% end %>
+  <p>Price: <%= number_to_currency(@listing.price / 100.0) %></p>
+<% else %>
+  <p>Trade for: <%= @listing.board_game_trade %></p>
+<% end %>
 
 <div class="show-image">  
     <%# if @listing.picture.attached? %>
@@ -20,6 +28,7 @@
     <%= link_to "Delete", listing_path(@listing.id), method: :delete %>
   <% end %>
   <% if user_signed_in? && @listing.completed == false && @listing.profile.id != current_profile.id %>
+    <%= link_to @listing.listing_type == 'Money' ? 'Buy' : 'Trade', root_path %>
   <% end %>
   <%= link_to "Back", :back %>
 </div>
