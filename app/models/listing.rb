@@ -6,7 +6,6 @@ class Listing < ApplicationRecord
   validates :board_game_name,
             :condition,
             :listing_type,
-            :completed,
             presence: true
   validates :listing_type, inclusion: {
     in: %w[Money Trade],

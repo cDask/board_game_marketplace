@@ -1,0 +1,40 @@
+<%= render "shared/form-errors", resource: listing %>
+
+<%= form_with model: listing, local: true, class: "listings-form" do |f| %>
+  <%= f.label :board_game_name %>
+  <%= f.text_field :board_game_name %>
+  <%= f.label :condition %>
+  <%= select(:listing, :condition, [
+      'Brand New in Shrink',
+      'Played a few times',
+      'Unplayed but punched',
+      'Missing pieces',
+      'Dented box',
+      'Heavily played'
+      ]) %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.label :listing_type %>
+  <%= f.select :listing_type, ['Money','Trade'] %>
+  <div class="form_row">
+    <label for="payment_ids[]">Payment:</label>
+    <% for payment in Payment.all do %>
+      <br><%= check_box_tag 'payment_ids[]', payment.id,
+              listing.payment_ids.include?(payment.id) %>
+      <%= payment.name.humanize %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% @payments.each do |p| %>
+      <%= f.label p.name %>
+      <%= check_box("payments", "name", { multiple:  true }, p.name, nil) %>
+    <% end %>
+  </div>
+  <%= f.label :price %>
+  <%= f.number_field :price  %>
+  <%= f.label :board_game_trade %>
+  <%= f.text_field :board_game_trade %>
+  <%= f.label :picture %> 
+  <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
+  <%= f.submit %>
+<% end %>

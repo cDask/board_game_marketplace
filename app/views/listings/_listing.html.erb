@@ -1,0 +1,10 @@
+<div class="card">
+    <%= listing.board_game_name %>
+    <%=  listing.profile.username %>
+    <% if listing.listing_type == 'Money' %>
+        <%= listing.price %>
+    <% elsif listing.listing_type == 'Trade' %>
+        <%= listing.board_game_trade %>
+    <% end %>
+    <%= link_to 'View', listing %>
+</div>

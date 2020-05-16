@@ -1,0 +1,14 @@
+<header class="message-header"><%= @conversation.with(current_user.profile).username %></header>
+
+<div id="conversation-main">
+  <div id="conversation-body">
+    <%= render @conversation.messages %>
+  </div>
+
+  <%= form_for @message do |f| %>
+    <%= hidden_field_tag 'conversation_id', @conversation.id %>
+    <%= f.text_field :body %>
+
+    <%= f.submit %>
+  <% end %>
+</div>
