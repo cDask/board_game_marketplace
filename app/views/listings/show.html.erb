@@ -3,6 +3,8 @@
 <% end %>
 
 <h1><%= @listing.board_game_name %></h1>
+
+<%= image_tag @listing.picture[0] if @listing.picture.attached? %>
 <p><%= @listing.description %></p>
 <% if @listing.listing_type == 'Money' %>
   <% @listing.payments.each do |p| %>

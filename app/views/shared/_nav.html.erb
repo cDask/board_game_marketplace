@@ -42,7 +42,7 @@
             <% if user_signed_in? %>
                 <% if current_profile %> 
                     <%= link_to profile_path(current_profile), class:'nav-link' do %>
-                    <img src="http://movingkidsforward.org/wp-content/uploads/2013/05/profile_default800x600.jpg" alt="">
+                    <%= render 'shared/load_profile_pic', profile: current_profile %>
                     <span class="link-text"><%= current_profile.username %></span>
                     <% end %>
                 <% else %>

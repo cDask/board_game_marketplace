@@ -3,6 +3,7 @@ class Listing < ApplicationRecord
   has_many :transactions
   has_many :listing_payments
   has_many :payments, through: :listing_payments
+  has_many_attached :picture
   validates :board_game_name,
             :condition,
             :listing_type,

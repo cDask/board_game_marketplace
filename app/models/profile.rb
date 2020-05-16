@@ -11,6 +11,7 @@ class Profile < ApplicationRecord
            foreign_key: 'received_id',
            inverse_of: 'receiver'
   has_many :messages, dependent: :destroy
+  has_one_attached :profile_pic
   validates :username, presence: true
   validates :rating, numericality: { less_than_or_equal_to: 500 }
   validates :rating, numericality: { greater_than_or_equal_to: 100 }

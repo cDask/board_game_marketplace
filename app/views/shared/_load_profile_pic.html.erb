@@ -1,0 +1,5 @@
+<% if profile.profile_pic.attached? %>
+    <%= image_tag profile.profile_pic %>
+<% else %>
+     <img src="http://movingkidsforward.org/wp-content/uploads/2013/05/profile_default800x600.jpg" alt="">
+<% end %>

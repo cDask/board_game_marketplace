@@ -61,7 +61,7 @@ class ListingsController < ApplicationController
     ).permit(
       :board_game_name, :condition, :listing_type,
       :price, :board_game_trade, :description,
-      :completed, :profile, :picture, :completed
+      :completed, :profile, :completed, picture: []
     )
   end
 

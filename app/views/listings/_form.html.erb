@@ -35,6 +35,6 @@
   <%= f.label :board_game_trade %>
   <%= f.text_field :board_game_trade %>
   <%= f.label :picture %> 
-  <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
+  <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg', multiple: true %>
   <%= f.submit %>
 <% end %>
