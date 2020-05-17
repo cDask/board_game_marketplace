@@ -14,9 +14,9 @@ body {
 
 .navbar {
   position: fixed;
-  background-color: $accent-colour;
+  background-color: $dark;
   transition: width 600ms ease;
-  overflow: scroll;
+  z-index: 1;
 }
 
 .navbar-nav {
@@ -48,20 +48,19 @@ body {
     min-width: 2rem;
     margin: 0 1.5rem;
   }
-  img{
+  img {
     border-radius: 50%;
     height: 2rem;
     width: 2rem;
     min-width: 2rem;
     margin: 0 1.5rem;
     object-fit: cover;
-  
   }
 }
 
 .nav-link:hover {
   filter: grayscale(0%) opacity(1);
-  background: $bg-secondary;
+  background: $accent-colour;
   color: $text-secondary;
 }
 
@@ -69,8 +68,6 @@ body {
   font-size: 0.6rem;
   margin-top: 0.2rem;
 }
-
-
 
 .fa-primary {
   color: #ff7eee;
@@ -132,10 +129,6 @@ body {
   .nav-link {
     justify-content: center;
   }
-
-  main {
-    margin: 0;
-  }
 }
 
 /* Large screens */
@@ -146,8 +139,26 @@ body {
     height: 100vh;
   }
 
+  .nav-item:last-child {
+    margin-top: auto;
+  }
+
+  .nav-link {
+    flex-flow: row;
+    justify-content: flex-start;
+    height: 5rem;
+  }
+
+  .link-text {
+    font-size: 16px;
+    margin-top: 0;
+    display: none;
+    margin-left: 1rem;
+    white-space: nowrap;
+  }
+
   .navbar:hover {
-    width: 16rem;
+    width: 14rem;
   }
 
   .navbar:hover .link-text {
@@ -155,16 +166,82 @@ body {
   }
 
   .navbar:hover .logo svg {
-    margin-left: 11rem;
+    margin-left: 0rem;
   }
 
   .navbar:hover .logo-text {
     left: 0px;
   }
-  .link-text{
-    margin-left: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar {
+    top: 0;
+    width: 5rem;
+    height: 100vh;
   }
+
   .nav-item:last-child {
     margin-top: auto;
+  }
+
+  .nav-link {
+    flex-flow: row;
+    justify-content: flex-start;
+    height: 5rem;
+  }
+
+  .link-text {
+    font-size: 16px;
+    margin-top: 0;
+    display: none;
+    margin-left: 1rem;
+    white-space: nowrap;
+  }
+
+  .navbar:hover {
+    width: 14rem;
+  }
+
+  .navbar:hover .link-text {
+    display: inline;
+  }
+
+  .navbar:hover .logo svg {
+    margin-left: 0rem;
+  }
+
+  .navbar:hover .logo-text {
+    left: 0px;
+  }
+}
+
+@media only screen and (min-width: 1224px) {
+  .navbar {
+    top: 0;
+    width: 14rem;
+    height: 100vh;
+  }
+
+  .nav-item:last-child {
+    margin-top: auto;
+  }
+
+  .nav-link {
+    flex-flow: row;
+    justify-content: flex-start;
+    height: 5rem;
+  }
+
+  .link-text {
+    font-size: 16px;
+    margin-top: 0;
+    display: inline;
+    margin-left: 1rem;
+    white-space: nowrap;
+  }
+
+  .navbar:hover {
+    width: 14rem;
   }
 }
