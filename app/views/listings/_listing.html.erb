@@ -1,10 +1,31 @@
-<div class="card">
-    <%= listing.board_game_name %>
-    <%=  listing.profile.username %>
-    <% if listing.listing_type == 'Money' %>
-        <%= listing.price %>
-    <% elsif listing.listing_type == 'Trade' %>
-        <%= listing.board_game_trade %>
-    <% end %>
-    <%= link_to 'View', listing %>
-</div>
+<%= link_to listing, class:'card' do %>
+    <div class="title">
+        <%= listing.board_game_name %>
+    </div>    
+    <div class="pic">
+        <% if listing.picture.attached? %>
+            <%= image_tag listing.picture.first %>
+        <% else %>
+            <img src="http://movingkidsforward.org/wp-content/uploads/2013/05/profile_default800x600.jpg" alt="">
+        <% end %>
+    </div>
+    <div class="prf-pic">
+        <%= render 'shared/load_profile_pic', profile: listing.profile %>
+    </div>
+    <div class="poster">
+        <%=  listing.profile.username %>
+    </div>
+    <div class="rating">
+        <%= listing.profile.rating %>
+    </div>
+    <div class="condition">
+        <%= listing.condition %>
+    </div>
+    <div class="price">
+        <% if listing.listing_type == 'Money' %>
+            <%= number_to_currency(listing.price/100) %>
+        <% elsif listing.listing_type == 'Trade' %>
+            Trade for: <%= listing.board_game_trade %>
+        <% end %>
+    </div>
+<% end %>

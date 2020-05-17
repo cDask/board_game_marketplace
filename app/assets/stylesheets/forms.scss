@@ -18,7 +18,7 @@
     border: 1px grey solid;
     border-radius: 1rem;
     padding: 1rem;
-    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: $box-shadow;
     .field {
       margin: 0.35rem 0px;
       input, textarea, select{

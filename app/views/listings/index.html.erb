@@ -1,5 +1,6 @@
-<h1>Hey Ping!</h1>
-
+<h2>Listings</h2>
 <%= link_to 'NEW LISTING', new_listing_path %>
-<%= render @listings %>
+<div class="catalogue">
+    <%= render @listings %>
+</div>
 <%= link_to 'conversations', conversations_path %>

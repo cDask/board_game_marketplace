@@ -1,3 +1,86 @@
 // Place all the styles related to the listings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import "./theme.scss";
+
+.catalogue {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 250px;
+  max-width: 300px;
+  border: 1px solid rgba(100, 71, 71, 0.5);
+  margin: 0.4rem;
+  border-radius: 0.2rem;
+  display: grid;
+  text-decoration: none;
+  color: black;
+  box-shadow: $box-shadow;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-out;
+  grid-template-columns: 1fr 2fr 4fr;
+  grid-template-rows: 1fr 8fr 1fr 1fr;
+  grid-template-areas:
+    "title title title"
+    "pic pic pic"
+    "prf_pic username condition"
+    "prf_pic rating price";
+  align-items: center;
+  font-size: 13px;
+
+  .title {
+    grid-area: title;
+    text-align: center;
+    font-size: 20px;
+    height: 100%;
+    background: $dark;
+    color: white;
+  }
+  .pic {
+    grid-area: pic;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .prf-pic {
+    grid-area: prf_pic;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .poster {
+    grid-area: username;
+    font-weight: bold;
+  }
+  .rating {
+    grid-area: rating;
+  }
+  .condition {
+    text-align: right;
+    grid-area: condition;
+    margin-right: 0.2rem;
+  }
+  .price {
+    text-align: right;
+    grid-area: price;
+    margin-right: 0.2rem;
+    white-space: nowrap;
+  }
+}
+.card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.profile-icon {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  min-width: 2rem;
+  margin: 0.1rem 0.3rem;
+  object-fit: cover;
+}
