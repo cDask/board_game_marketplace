@@ -5,7 +5,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   h2 {
     margin-bottom: 1rem;
     font-family: $title2;
@@ -21,6 +20,8 @@
     box-shadow: $box-shadow;
     .field {
       margin: 0.35rem 0px;
+      display: flex;
+      flex-direction: column;
       input, textarea, select{
         margin-top: 5px;
         border-radius: 0.25rem;

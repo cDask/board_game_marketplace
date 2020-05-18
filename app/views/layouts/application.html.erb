@@ -12,8 +12,12 @@
 
   <body>
     <%= render 'shared/nav' %>
+    <header>Board Games Exchange</header>
     <main>
       <%= yield %>
+      <%= link_to new_listing_path, class: "add-listing" do %>
+          <h4 class="plus">+</h4><h4 class="add-text">Add Listing</h4>
+      <% end %>
     </main>
   </body>
 </html>
