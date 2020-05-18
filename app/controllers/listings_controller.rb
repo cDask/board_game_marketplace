@@ -4,7 +4,7 @@ class ListingsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @listings = Listing.all
+    @listings = Listing.where(completed: false)
   end
 
   def show; end
