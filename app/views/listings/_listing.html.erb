@@ -2,13 +2,11 @@
     <div class="title">
         <%= listing.board_game_name %>
     </div>    
-    <div class="pic">
-        <% if listing.picture.attached? %>
-            <%= image_tag listing.picture.first %>
-        <% else %>
-            <img src="http://movingkidsforward.org/wp-content/uploads/2013/05/profile_default800x600.jpg" alt="">
-        <% end %>
-    </div>
+    <% if listing.picture.attached? %>
+        <%= image_tag listing.picture.first,class:'pic'%>
+    <% else %>
+        <img src="http://movingkidsforward.org/wp-content/uploads/2013/05/profile_default800x600.jpg" alt="" class='pic'>
+    <% end %>
     <div class="prf-pic">
         <%= render 'shared/load_profile_pic', profile: listing.profile %>
     </div>

@@ -21,7 +21,7 @@
   box-shadow: $box-shadow;
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-out;
   grid-template-columns: 1fr 2fr 4fr;
-  grid-template-rows: 1fr 8fr 1fr 1fr;
+  grid-template-rows: 1fr 6fr 1fr 1fr;
   grid-template-areas:
     "title title title"
     "pic pic pic"
@@ -40,12 +40,9 @@
   }
   .pic {
     grid-area: pic;
-
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
   .prf-pic {
     grid-area: prf_pic;
