@@ -32,7 +32,9 @@
   <% end %>
   <% if @listing.completed == false && (!user_signed_in? || @listing.profile.id != current_profile.id) %>
     <%= f.submit @listing.listing_type == 'Money' ? 'Buy' : 'Trade'%>
+    <%= link_to "Pay Deposit", "", id: "stripe" %>
   <% end %>
   <%= link_to "Back", :back %>
 </div>
 <% end %>
+<%= javascript_pack_tag "stripe" %>

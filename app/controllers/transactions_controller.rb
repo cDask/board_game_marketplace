@@ -7,14 +7,59 @@ class TransactionsController < ApplicationController
   end
 
   def create
+    create_transaction
     if params[:payment] == 'Cash'
-      create_transaction
+      redirect_to new_listing_transaction_path
     elsif params[:payment] == 'Stripe'
 
     end
   end
 
+  def stripe_id
+    @listing = Listing.find(params[:listing_id])
+    session_id = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      customer_email: current_user.email,
+      line_items: line_items,
+      payment_intent_data: payment_intent,
+      success_url: "#{root_url}listing/
+      #{@listing.id}/transactions/
+      #{@transaction_id}",
+      cancel_url: "#{root_url}listings"
+    ).id
+    render_json(session_id)
+  end
+
   private
+
+  def render_json(session_id)
+    render json: {
+      id: session_id,
+      stripe_public_key: Rails.application.credentials.dig(
+        :stripe,
+        :public_key
+      )
+    }
+  end
+
+  def payment_intent
+    {
+      metadata: {
+        user_id: current_user.id,
+        listing_id: @listing.id
+      }
+    }
+  end
+
+  def line_items
+    [{
+      name: @listing.board_game_name,
+      description: @listing.description,
+      amount: @listing.price,
+      currency: 'aud',
+      quantity: 1
+    }]
+  end
 
   def create_transaction
     @transaction = Transaction.new(
@@ -32,7 +77,6 @@ class TransactionsController < ApplicationController
   def transaction_steps
     complete_listing
     send_autmated_message
-    redirect_to new_listing_transaction_path
   end
 
   def complete_listing

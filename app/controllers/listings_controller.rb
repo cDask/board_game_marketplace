@@ -31,10 +31,7 @@ class ListingsController < ApplicationController
 
   def update
     if @listing.update(listing_params)
-      # TODO: FIX PAYMENT UPDATES
-      params[payment_ids].each do |p|
-        @listing.payments << Payment.find_by(name: p)
-      end
+      update_listing_payments(@listing)
       redirect_to @listing
     else
       render :edit
@@ -47,6 +44,15 @@ class ListingsController < ApplicationController
   end
 
   private
+
+  def update_listing_payment(listing)
+    listing.payments.delete_all
+    return unless params[:payment_ids]
+
+    params[:payment_ids].each do |p|
+      listing.payments << Payment.find(p)
+    end
+  end
 
   def add_payments
     return unless params[:payments]
