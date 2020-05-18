@@ -76,7 +76,7 @@ class TransactionsController < ApplicationController
 
   def transaction_steps
     complete_listing
-    send_autmated_message
+    send_automated_message
   end
 
   def complete_listing

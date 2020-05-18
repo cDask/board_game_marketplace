@@ -31,7 +31,7 @@ class ListingsController < ApplicationController
 
   def update
     if @listing.update(listing_params)
-      update_listing_payments(@listing)
+      update_listing_payment(@listing)
       redirect_to @listing
     else
       render :edit
