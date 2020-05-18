@@ -5,7 +5,7 @@
     <% if listing.picture.attached? %>
         <%= image_tag listing.picture.first,class:'pic'%>
     <% else %>
-        <img src="./default_board_game.jpg" alt="" class='pic'>
+        <img src="./app/assets/images/default/default_board_game.jpg" alt="" class='pic'>
     <% end %>
     <div class="prf-pic">
         <%= render 'shared/load_profile_pic', profile: listing.profile %>

@@ -37,28 +37,23 @@ payment1 = Payment.create(name: 'Stripe')
 payment2 = Payment.create(name: 'Cash')
 puts 'PAYMENTS CREATED'
 
-listing1 = Listing.create(
-    board_game_name: 'Gaia Project',
-    condition: 'Brand New in Shrink',
-    listing_type: 'Money',
-    price: 10000,
-    board_game_trade: 'None',
-    description: 'Awesome game',
-    completed: false,
-    profile: profile
-)
+profile_array = [profile2,profile]
 
-listing2 = Listing.create(
-    board_game_name: 'Gaia Project',
-    condition: 'Brand New in Shrink',
-    listing_type: 'Money',
-    price: 10000,
-    board_game_trade: 'None',
-    description: 'Awesome game',
-    completed: false,
-    profile: profile2
-)
+9.times do 
+    Listing.create(
+        board_game_name: 'Gaia Project',
+        condition: 'Brand New in Shrink',
+        listing_type: 'Money',
+        price: 10000,
+        board_game_trade: 'None',
+        description: 'Awesome game',
+        completed: false,
+        profile: profile_array[rand(0..1)]
+    )
+end
 
-listing1.payments << payment1
-listing2.payments << payment2
+Listing.all.each do |l|
+    l.payments << payment1
+    l.payments << payment2
+end
 puts 'PAYMENTS CREATED'

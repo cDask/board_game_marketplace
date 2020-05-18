@@ -30,7 +30,7 @@
     <%= link_to "Edit", edit_listing_path(@listing.id) %>
     <%= link_to "Delete", listing_path(@listing.id), method: :delete %>
   <% end %>
-  <% if @listing.completed == false && (!user_signed_in? || @listing.profile.id != current_profile.id) %>
+  <% if !@listing.completed %>
     <%= f.submit @listing.listing_type == 'Money' ? 'Buy' : 'Trade'%>
     <%= link_to "Pay Deposit", "", id: "stripe" %>
   <% end %>

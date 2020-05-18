@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_listing, except: [:new]
 
   def new
     @listing = Listing.includes(:transactions).find(params[:listing_id])
@@ -67,30 +68,29 @@ class TransactionsController < ApplicationController
       profile: current_user.profile
     )
     if @transaction.save
-      transaction_steps
+      transaction_steps(@listing)
     else
       flash[:alert] = 'Something Went Wrong'
       render listing_path(params[:listing_id])
     end
   end
 
-  def transaction_steps
-    complete_listing
-    send_automated_message
+  def transaction_steps(listing)
+    send_automated_message(listing)
   end
 
-  def complete_listing
+  def find_listing
     @listing = Listing.find(params[:listing_id])
+  end
+
+  def send_automated_message(_listing)
     @listing.completed = true
     @listing.save
-  end
-
-  def send_automated_message
     @conversation = Conversation.between(
       current_user.profile.id, @listing.profile.id
     )[0]
     @conversation ||= Conversation.create(author_id: current_user.profile.id,
-                                          receiver_id: @receiver.id)
+                                          receiver_id: @listing.profile.id)
     automated_message
     @message.conversation_id = @conversation.id
     @message.save!
