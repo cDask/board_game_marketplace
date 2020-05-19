@@ -4,7 +4,7 @@ class ListingsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @listings = Listing.where(completed: false)
+    @listings = Listing.where(completed: false, deleted: false)
   end
 
   def show; end
@@ -45,7 +45,8 @@ class ListingsController < ApplicationController
   end
 
   def destroy
-    @listing.destroy
+    @listing.deleted = true
+    @listing.save
     redirect_to root_path
   end
 
