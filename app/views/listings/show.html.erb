@@ -1,6 +1,5 @@
-
 <h2><%= @listing.board_game_name %></h2>
-<%= render 'shared/flash-messsages' %>
+<%= render 'shared/flash-messages' %>
 <div class="listing-grid">
   <% if @listing.picture.attached? %>
     <%= image_tag @listing.picture[0], class:"main-image", id: 'image-focus'%>
