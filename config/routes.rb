@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "listings#index"
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   resources :profiles
   resources :listings do
     resources :transactions, only: [:new,:create,:show]

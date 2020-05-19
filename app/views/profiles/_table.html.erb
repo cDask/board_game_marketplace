@@ -14,7 +14,7 @@
         <td><%= listing.listing_type %></td>
         <td><%= number_to_currency(listing.price/100.0) %></td>
         <td><%= listing.board_game_trade %></td>
-        <td><%= link_to 'View', listing  %><%= link_to 'Edit', edit_listing_path %></td>
+        <td><%= link_to 'View', listing  %><%= link_to 'Edit', edit_listing_path(listing.id) unless listing.completed%><%= link_to "Delete", listing_path(listing.id), method: :delete, class:'button-red-1', data: { confirm: 'Are you sure?' }  %></td>
     </tr>
     <% end %>
 </table>

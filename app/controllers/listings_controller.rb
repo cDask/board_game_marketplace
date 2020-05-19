@@ -10,8 +10,14 @@ class ListingsController < ApplicationController
   def show; end
 
   def new
-    @listing = Listing.new
-    @payments = Payment.all
+    # Check if current user has a profile
+    if current_user.profile
+      @listing = Listing.new
+      @payments = Payment.all
+    else
+      flash[:alert] = 'Please create your profile first'
+      redirect_to new_profile_path
+    end
   end
 
   def edit
