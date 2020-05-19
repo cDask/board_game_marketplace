@@ -41,52 +41,29 @@
     <h4>Description:</h4>
     <p class='desc'><%= @listing.description %></p>
   </div>
-    <%# if @listing.listing_type == 'Money' %>
-  <div class="payment-options">
-  <h4>Payment Options:</h4>
-    <%= form_with url:listing_transactions_path(@listing.id) do  |f| %>
-      <ul>
-        <% @listing.payments.each do |p| %>
-          <li>
-            <%= f.radio_button 'payment', p.name%>
-            <%= f.label p.name %>
-          </li>
-        <% end %>
-      </ul>
-  </div>
+
   <div class="price">
     <h4>Price:</h4>
     <p class='desc'><%= number_to_currency(@listing.price / 100.0) %></p>
   </div>
     
-    <%# else %>
-      <%# <div class="payment-options"> %>
-        <%# <h4>Trade for:</h4> %>
-        <%#= form_with url:listing_transactions_path(@listing.id) do  |f| %>
-      <%# </div> %>
-      <%# <div class="price"> %>
-    <%# end %>  
-
-    <%# <div class="show-image"> %>
-        <%# if @listing.picture.attached? %>
-            <%# <div style="= background_image(@listing)"></div> %>
-        <%# else %>  
-            <%# <div class="backup-image"></div> %>
-        <%# end %>
-    <%# </div> %>
-
+  <div class="payment-options">
+    <h4>Payment Options:</h4>
+      <% unless @listing.completed %>
+        <% if @listing.payments.pluck(:name).include?('Cash') %>
+          <%= link_to 'Pay with Cash', listing_transactions_path(@listing.id), class:'button-blue-1', method: :post %>
+        <% end %>
+        <% if @listing.payments.pluck(:name).include?('Stripe') %>
+          <%= link_to "Pay with Card", "", id: "stripe", class:'button-blue-1' %>
+        <% end %>
+      <% end %>
+  </div>
   <div class="links">
     <% if user_signed_in? && current_profile && current_profile.id == @listing.profile_id %>
       <%= link_to "Edit", edit_listing_path(@listing.id), class:'button-blue-1'%>
       <%= link_to "Delete", listing_path(@listing.id), method: :delete, class:'button-blue-1' %>
     <% end %>
-    <% unless @listing.completed %>
-      <%= f.submit @listing.listing_type == 'Money' ? 'Buy' : 'Trade', class: 'button-blue-1 remove-submit-styling'%>
-      <%= link_to "Pay Deposit", "", id: "stripe", class:'button-blue-1' %>
-    <% end %>
     <%= link_to "Back", :back, class: 'button-blue-1' %>
   </div>
-  <% end %>
-  <%# </div> %>
 </div>
 <%= javascript_pack_tag "stripe" %>
