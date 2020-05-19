@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   resources :profiles
   resources :listings do
-    resources :transactions, only: [:new,:create,:show,:edit]
+    resources :transactions, only: [:new,:create,:show,:update]
   end
+  post "/transaction/:id/review", to: 'transactions#review', as: 'review'
   get "/payments/session", to: "payments#stripe_id"
   get "/payments/success", to: "payments#success"
   post "/payments/webhook", to: "payments#webhook"

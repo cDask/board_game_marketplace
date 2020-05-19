@@ -34,4 +34,27 @@
             border-radius: 50px;
         }
     }
+    .form-content{
+        form{
+            border: none;
+            box-shadow: none;
+        }
+    }
+}
+
+.transaction-new{
+    display: flex;
+}
+.instructions{
+    p{
+        text-align: center;
+    }
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    a{
+        margin: 1rem;
+    }
 }

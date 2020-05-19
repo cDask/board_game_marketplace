@@ -1,17 +1,17 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_listing, except: [:new]
+  before_action :find_listing, except: %i[new review]
 
   def new
-    @listing = Listing.with_attached_pictures.includes(
+    @listing = Listing.with_attached_picture.includes(
       :transactions
     ).find(params[:listing_id])
-    @transaction = @listing.transactions.first
+    @transaction = @listing.transactions.last
   end
 
   def show
     @listing = Listing.includes(:transactions).find(params[:listing_id])
-    @transaction = @listing.transactions.first
+    @transaction = @listing.transactions.last
   end
 
   def create
@@ -25,6 +25,18 @@ class TransactionsController < ApplicationController
       render listing_path(params[:listing_id])
     end
     redirect_to new_listing_transaction_path
+  end
+
+  def review
+    @transaction = Transaction.find(params[:id])
+    if params[:rating].empty? || params[:review].empty?
+      flash[:alert] = 'Please fill in review and rating'
+    else
+      @transaction.rating = params[:rating]
+      @transaction.review = params[:review]
+      flash[:alert] = 'Transactions didnt save' unless @transaction.save
+    end
+    redirect_to listing_transaction_path(@transaction.listing.id)
   end
 
   private
