@@ -10,12 +10,12 @@ class MessagesController < ApplicationController
   def create
     @conversation ||= Conversation.create(author_id: current_user.profile.id,
                                           receiver_id: @receiver.id)
-    @message = current_user.profile.messages.new message_params
-    @message.conversation_id = @conversation.id
-    @message.save!
-
-    flash[:success] = 'Your message was sent!'
-    redirect_to conversation_path(@conversation)
+    if @conversation.id
+      send_message
+    else
+      flash[:alert] = 'Cant start conversation with yourself'
+      redirect_to root_path
+    end
   end
 
   private
@@ -49,5 +49,13 @@ class MessagesController < ApplicationController
     @conversation = Conversation.between(
       current_user.profile.id, @receiver.id
     )[0]
+  end
+
+  def send_message
+    @message = current_user.profile.messages.new message_params
+    @message.conversation_id = @conversation.id
+    @message.save!
+    flash[:success] = 'Your message was sent!'
+    redirect_to conversation_path(@conversation)
   end
 end

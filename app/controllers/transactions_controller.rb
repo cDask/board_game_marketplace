@@ -8,11 +8,14 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    create_transaction
     if params[:payment] == 'Cash'
+      create_transaction
       redirect_to new_listing_transaction_path
     elsif params[:payment] == 'Stripe'
-
+      create_transaction
+      respond_to do |format|
+        format.js { render js: 'stripeFunction();' }
+      end
     end
   end
 
@@ -68,15 +71,11 @@ class TransactionsController < ApplicationController
       profile: current_user.profile
     )
     if @transaction.save
-      transaction_steps(@listing)
+      send_automated_message(listing)
     else
       flash[:alert] = 'Something Went Wrong'
       render listing_path(params[:listing_id])
     end
-  end
-
-  def transaction_steps(listing)
-    send_automated_message(listing)
   end
 
   def find_listing

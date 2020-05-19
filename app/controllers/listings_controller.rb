@@ -55,10 +55,10 @@ class ListingsController < ApplicationController
   end
 
   def add_payments
-    return unless params[:payments]
+    return unless params[:payment_ids]
 
-    payment_params[:name].each do |p|
-      @listing.payments << Payment.find_by(name: p)
+    params[:payment_ids].each do |p|
+      @listing.payments << Payment.find(p)
     end
   end
 
@@ -73,7 +73,7 @@ class ListingsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payments).permit(name: [])
+    # params.require(:payments_ids).permit()
   end
 
   def set_listing
