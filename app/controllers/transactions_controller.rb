@@ -71,7 +71,7 @@ class TransactionsController < ApplicationController
       profile: current_user.profile
     )
     if @transaction.save
-      send_automated_message(listing)
+      send_automated_message(@listing)
     else
       flash[:alert] = 'Something Went Wrong'
       render listing_path(params[:listing_id])
