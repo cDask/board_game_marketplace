@@ -1,4 +1,4 @@
 class ListingPayment < ApplicationRecord
-  belongs_to :listing, dependent: :delete
-  belongs_to :payment, dependent: :delete
+  belongs_to :listing, dependent: :destroy
+  belongs_to :payment, dependent: :destroy
 end
