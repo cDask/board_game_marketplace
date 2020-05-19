@@ -1,11 +1,6 @@
 
 <h2><%= @listing.board_game_name %></h2>
-<% if flash[:success] %>
-  <p><%= flash[:success] %></p>
-<% end %>
-<% if flash[:alert] %>
-  <p><%= flash[:alert] %></p>
-<% end %>
+<%= render 'shared/flash-messsages' %>
 <div class="listing-grid">
   <% if @listing.picture.attached? %>
     <%= image_tag @listing.picture[0], class:"main-image", id: 'image-focus'%>
