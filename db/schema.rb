@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_055102) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string "username"
+    t.string "username", unique: true
     t.integer "rating", default: 500
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false

@@ -25,8 +25,8 @@ class ProfilesController < ApplicationController
     # @profile = current_user.profile.create(profile_params)
     @profile = Profile.new(profile_params)
     @profile.user = current_user
-    if !@profile.save
-      # if @profile.errors.any?
+    @profile.save
+    if @profile.errors.any?
       render :new
     else
       flash[:success] = 'You successfully created a new profile!'

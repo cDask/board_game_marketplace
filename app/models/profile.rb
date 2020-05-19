@@ -13,6 +13,7 @@ class Profile < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_one_attached :profile_pic
   validates :username, presence: true
+  validates :username, uniqueness: true
   validates :rating, numericality: { less_than_or_equal_to: 500 }
   validates :rating, numericality: { greater_than_or_equal_to: 100 }
 end
