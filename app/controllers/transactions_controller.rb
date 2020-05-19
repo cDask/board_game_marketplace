@@ -3,6 +3,13 @@ class TransactionsController < ApplicationController
   before_action :find_listing, except: [:new]
 
   def new
+    @listing = Listing.with_attached_pictures.includes(
+      :transactions
+    ).find(params[:listing_id])
+    @transaction = @listing.transactions.first
+  end
+
+  def show
     @listing = Listing.includes(:transactions).find(params[:listing_id])
     @transaction = @listing.transactions.first
   end

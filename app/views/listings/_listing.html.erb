@@ -20,7 +20,7 @@
         <%= listing.condition %>
     </div>
     <div class="price">
-        <% if listing.listing_type == 'Money' %>
+        <% if listing.listing_type == 'Sell' %>
             <%= number_to_currency(listing.price/100) %>
         <% elsif listing.listing_type == 'Trade' %>
             Trade for: <%= listing.board_game_trade %>

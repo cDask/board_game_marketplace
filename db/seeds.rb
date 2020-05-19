@@ -36,7 +36,7 @@ profile_array = [profile2,profile]
     Listing.create(
         board_game_name: 'Gaia Project',
         condition: 'Brand New in Shrink',
-        listing_type: 'Money',
+        listing_type: 'Sell',
         price: 10000,
         board_game_trade: 'None',
         description: 'Awesome game',

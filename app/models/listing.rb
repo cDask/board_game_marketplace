@@ -9,7 +9,7 @@ class Listing < ApplicationRecord
             :listing_type,
             presence: true
   validates :listing_type, inclusion: {
-    in: %w[Money Trade],
+    in: %w[Sell Trade],
     message: '%<value> is not a valid listing type'
   }
   validates :condition, inclusion: {
@@ -23,11 +23,11 @@ class Listing < ApplicationRecord
     ],
     message: '%<value> is not a valid listing type'
   }
-  validates :price, presence: true, if: :listing_money?
+  validates :price, presence: true, if: :listing_sell?
   validates :board_game_trade, presence: true, if: :listing_trade?
 
-  def listing_money?
-    listing_type == 'Money'
+  def listing_sell?
+    listing_type == 'Sell'
   end
 
   def listing_trade?

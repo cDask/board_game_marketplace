@@ -24,13 +24,13 @@
 
   <div class="field">
     <%= f.label :listing_type %>
-    <%= f.select :listing_type, ['Money','Trade'], id:'listing-type', onChange:'change_payments()' %>
+    <%= f.select :listing_type, ['Sell','Trade'], id:'listing-type', onChange:'change_payments()' %>
   </div>
 
   <script type="text/javascript">
     function change_payments(){
         console.log('hello');
-      if(document.getElementById('listing-type') == 'Money'){
+      if(document.getElementById('listing-type') == 'Sell'){
         console.log('hello');
       } 
     }

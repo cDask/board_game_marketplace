@@ -130,7 +130,7 @@ h2{
   grid-template-areas:
   "main-image"
   "image-slides"
-  "seller"
+  "profile"
   "condition"
   "description"
   "payment-options"
@@ -222,7 +222,7 @@ h2{
     grid-template-columns: 7fr 3fr;
     grid-template-rows: 1fr 1fr 2.5fr 1.5fr 1fr 2fr;
     grid-template-areas:
-    "main-image seller"
+    "main-image profile"
     "main-image condition"
     "main-image description"
     "main-image payment-options"

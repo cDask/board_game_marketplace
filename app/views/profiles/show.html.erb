@@ -18,7 +18,7 @@
         <td><%= transaction.listing.profile.username %></td>
         <td><%= transaction.rating %></td>
         <td><%= transaction.review %></td>
-        <td><%= link_to 'View', listing_transactions_path(transaction.listing.id)  %></td>
+        <td><%= link_to 'View', listing_transaction_path(transaction.listing.id)  %></td>
     </tr>
     <% end %>
 </table>

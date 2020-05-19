@@ -19,12 +19,7 @@
     }
   </script>
   
-  <div class="seller">
-    <%= render 'shared/load_profile_pic', profile: @listing.profile %>
-    <h4><%= @listing.profile.username %></h4>
-    <h5><%= @listing.profile.rating %></h5>
-    <%= link_to 'Message', new_message_path(receiver_id: @listing.profile), class:'button-blue-1' %>
-  </div>
+  <%= render 'shared/load-profile', profile: @listing.profile %>
 
   <div class="condition">
     <h4>Condition:</h4>

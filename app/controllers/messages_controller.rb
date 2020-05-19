@@ -54,8 +54,13 @@ class MessagesController < ApplicationController
   def send_message
     @message = current_user.profile.messages.new message_params
     @message.conversation_id = @conversation.id
-    @message.save!
-    flash[:success] = 'Your message was sent!'
-    redirect_to conversation_path(@conversation)
+    if @message.conversation_id
+      @message.save!
+      flash[:success] = 'Your message was sent!'
+      redirect_to conversation_path(@conversation)
+    else
+      flash[:alert] = 'something wrong'
+      redirect_to root_path
+    end
   end
 end

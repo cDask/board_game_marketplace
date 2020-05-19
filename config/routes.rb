@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   resources :profiles
   resources :listings do
-    resources :transactions, only: [:new,:create,:show]
+    resources :transactions, only: [:new,:create,:show,:edit]
   end
   get "/payments/session", to: "payments#stripe_id"
   get "/payments/success", to: "payments#success"

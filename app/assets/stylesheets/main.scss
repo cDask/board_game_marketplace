@@ -6,7 +6,6 @@
   text-decoration: none;
   font-family: $general;
 }
-
 header{
   background: $dark;
   color: white;
@@ -14,6 +13,7 @@ header{
   font-size: small;
   font-family: $title3;
   padding: 0.5rem 0;
+  height: $topMargin;
 }
 
 main{

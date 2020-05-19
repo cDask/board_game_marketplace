@@ -1,0 +1,16 @@
+.profile{
+    display: flex;
+    padding: 0.5rem;
+    align-items: center;
+    .user-info{
+        h4{
+            margin: 0.25rem 0;
+        }
+        margin: 0 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+    a{
+        margin-left: auto;
+    }
+}
