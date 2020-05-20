@@ -5,7 +5,8 @@
     <% if listing.picture.attached? %>
         <%= image_tag listing.picture.first,class:'pic'%>
     <% else %>
-        <%= image_tag "default/default_board_game.jpg", alt: "Default picture of board game", class:'pic' %>
+        <div class="pic default-background"></div>
+        <%#= image_tag "default/default_board_game.jpg", alt: "Default picture of board game", class:'pic' %>
     <% end %>
     <div class="prf-pic">
         <%= render 'shared/load_profile_pic', profile: listing.profile %>

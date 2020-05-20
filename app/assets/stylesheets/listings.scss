@@ -144,8 +144,14 @@ h2{
     width:100%;
     height: 100%;
     object-fit: cover;
+    
   }
   margin-bottom: 150px;
+}
+
+.default-background{
+  background-image: url(image-path("default/default_board_game.jpg"));
+  background-size: cover;
 }
 
 .payment-options, .links, .condition, .price, .description{

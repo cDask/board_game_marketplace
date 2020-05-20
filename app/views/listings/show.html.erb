@@ -11,7 +11,8 @@
       <% end %>
     </div>
   <% else %>
-    <%= image_tag "default/default_board_game.jpg", alt: "Default picture of board game", class:'main-image' %>
+    <%#= image_tag "default/default_board_game.jpg", alt: "Default picture of board game", class:'main-image' %>
+    <div class="main-image default-background"></div>
   <% end %>
   <script type="text/javascript">
     function change_picture(clicked){
