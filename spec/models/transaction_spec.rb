@@ -7,7 +7,6 @@ RSpec.describe Transaction, type: :model do
     listing: listing,
     profile: profile,
     rating: 450,
-    review: 'Friendly'
   )}
   context 'associations' do
     it 'belongs to a Listing' do

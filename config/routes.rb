@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :listings do
     resources :transactions, only: [:new,:create,:show,:update]
   end
-  post "/transaction/:id/review", to: 'transactions#review', as: 'review'
+  post "/transaction/:id/rating", to: 'transactions#rating', as: 'rating'
   get "/payments/session", to: "payments#stripe_id"
   get "/payments/success", to: "payments#success"
   post "/payments/webhook", to: "payments#webhook"

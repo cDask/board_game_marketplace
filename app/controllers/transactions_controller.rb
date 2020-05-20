@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_listing, except: %i[review]
+  before_action :find_listing, except: %i[rating]
 
   def new
     @transaction = @listing.transactions.last
@@ -24,13 +24,12 @@ class TransactionsController < ApplicationController
     redirect_to new_listing_transaction_path
   end
 
-  def review
+  def rating
     @transaction = Transaction.includes(:listing).find(params[:id])
-    if params[:rating].empty? || params[:review].empty?
-      flash[:alert] = 'Please fill in review and rating'
+    if params[:rating].empty?
+      flash[:alert] = 'Please enter a rating'
     else
       @transaction.rating = params[:rating]
-      @transaction.review = params[:review]
       flash[:alert] = 'Transactions didnt save' unless @transaction.save
     end
     redirect_to listing_transaction_path(@transaction.listing.id)

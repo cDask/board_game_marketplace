@@ -1,16 +1,13 @@
 <div class="form-content">
-    <% if @transaction.review && @transaction.rating %>
-        <h4>Your Review about <%= @listing.profile.username %>:</h4>    
+    <% if @transaction.rating %>
+        <h4>You rated <%= @listing.profile.username %>:</h4>    
         <p><%= @transaction.rating %></p>
-        <p><%= @transaction.review %></p>
     <% else %>
-        <h4>Write a review about: <%= @listing.profile.username %></h4>
-        <%= form_with url: review_path(transaction.id) do  |f| %>
+        <h4>Give <%= @listing.profile.username %> a rating:</h4>
+        <%= form_with url: rating_path(transaction.id) do  |f| %>
             <%= f.label :rating %>
             <%= f.number_field :rating %>
-            <%= f.label :review %>
-            <%= f.text_area :review %>
-            <%= f.submit 'Submit review', class:'button-blue-1 remove-submit-styling'%>
+            <%= f.submit 'Submit rating', class:'button-blue-1 remove-submit-styling'%>
         <% end %>
     <% end %>
 </div>

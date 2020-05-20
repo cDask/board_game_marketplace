@@ -9,7 +9,6 @@
         <th>Board Game</th>
         <th>Seller</th>
         <th>Your Rating</th>
-        <th>Your Review</th>
         <th>Actions</th>
     </tr>
     <% @transactions.each do |transaction| %>
@@ -17,7 +16,6 @@
         <td><%= transaction.listing.board_game_name %></td>
         <td><%= transaction.listing.profile.username %></td>
         <td><%= transaction.rating %></td>
-        <td><%= transaction.review %></td>
         <td><%= link_to 'View', listing_transaction_path(transaction.listing.id)  %></td>
     </tr>
     <% end %>
