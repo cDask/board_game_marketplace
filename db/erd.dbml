@@ -1,0 +1,89 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table users as U {
+  id int [pk, increment]
+  email string
+  password string
+  is_admin boolean
+}
+
+Table profile as P {
+  id int [pk, increment]
+  username string
+  location text
+  profile_pic blob
+  user_id int [ref: - U.id]
+  rating int
+}
+
+Table images {
+  id int [pk, increment]
+  image blob
+ }
+
+
+Table listing {
+  id int
+  images int
+  board_game_name string
+  condition condition
+  description text
+  listing_type string
+  payment_options int
+  price int
+  board_game_trade string
+  completed boolean
+  deleted boolean
+  profile_id int
+}
+
+Enum condition{
+  brand_new_in_shrink
+  played_a_few_times
+  slightly_damaged
+}
+
+Table payment {
+  id int [pk, increment]
+  name int [not null, unique]
+}
+
+Table conversation {
+  id int [pk, increment]
+  author int [ref: > P.id]
+  receiver int [ref: > P.id]
+}
+
+Table message {
+  id int [pk]
+  profile_id int [ref: - profile.id]
+  conversation_id int [ref: > conversation.id]
+  body text
+}
+
+Table transaction {
+  id int [pk]
+  listing_id int [ref: - listing.id]
+  profile_id int [ref: > P.id]
+  rating int
+}
+
+Table listing_payments{
+  id int [pk]
+  listing_id int [not null]
+  payment_id int [not null]
+}
+
+
+
+Ref: "profile"."profile_pic" - "images"."id"
+
+Ref: "listing"."images" < "images"."id"
+
+Ref: "profile"."id" < "listing"."profile_id"
+
+Ref: "listing"."payment_options" < "listing_payments"."id"
+
+Ref: "payment"."id" < "listing_payments"."payment_id"
