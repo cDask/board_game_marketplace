@@ -4,6 +4,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    # Set a guest user if no user is not logged in
     user ||= User.new
     profile = user.profile
     profile ||= Profile.new
@@ -28,7 +29,8 @@ class Ability
     can %i[new create], Profile do
       user.profile.nil?
     end
-    can %i[index show edit], Profile, user_id: user.id
+    can %i[index], Profile, user: user.is_admin?
+    can %i[show edit], Profile, user_id: user.id
   end
 
   def admin_permissions(user)

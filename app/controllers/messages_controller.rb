@@ -8,6 +8,7 @@ class MessagesController < ApplicationController
   end
 
   def create
+    # Create a new conversation between two people if it doesnt exist already
     @conversation ||= Conversation.create(author_id: current_user.profile.id,
                                           receiver_id: @receiver.id)
     if @conversation.id
@@ -28,6 +29,7 @@ class MessagesController < ApplicationController
     if params[:receiver_id]
       conversation_receiver
     else
+      # Get conversation based on parameters to display
       @conversation = Conversation.find_by(
         id: params[:conversation_id]
       )
@@ -42,10 +44,12 @@ class MessagesController < ApplicationController
   end
 
   def conversation_receiver
+    # Get the Profile of the other person in the conversation
     @receiver = Profile.find_by(id: params[:receiver_id])
 
     redirect_to(root_path) && return unless @receiver
 
+    # Get conversation between current user and another profile
     @conversation = Conversation.between(
       current_user.profile.id, @receiver.id
     )[0]

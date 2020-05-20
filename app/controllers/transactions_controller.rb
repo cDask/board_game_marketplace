@@ -11,11 +11,15 @@ class TransactionsController < ApplicationController
   end
 
   def show
-    @listing = Listing.includes(:transactions).find(params[:listing_id])
+    # Get the listing
+    @listing = Listing.with_attached_picture.includes(
+      :transactions
+    ).find(params[:listing_id])
     @transaction = @listing.transactions.last
   end
 
   def create
+    # Create a new listing
     @transaction = Transaction.new(
       listing_id: params[:listing_id], profile: current_user.profile
     )
@@ -29,6 +33,7 @@ class TransactionsController < ApplicationController
   end
 
   def rating
+    # Get the transaction with its listing to update the rating
     @transaction = Transaction.includes(:listing).find(params[:id])
     if params[:rating].empty?
       flash[:alert] = 'Please enter a rating'
@@ -51,6 +56,7 @@ class TransactionsController < ApplicationController
   end
 
   def find_listing
+    # Get the listing with images and connected transaction
     @listing = Listing.with_attached_picture.includes(
       :transactions
     ).find(params[:listing_id])
@@ -59,9 +65,11 @@ class TransactionsController < ApplicationController
   def send_automated_message(_listing)
     @listing.completed = true
     @listing.save
+    # Gets the conversation between current user and the poster of the listing
     @conversation = Conversation.between(
       current_user.profile.id, @listing.profile.id
     )[0]
+    # if conversation doesnt exist create a new one
     @conversation ||= Conversation.create(author_id: current_user.profile.id,
                                           receiver_id: @listing.profile.id)
     automated_message
@@ -77,5 +85,9 @@ class TransactionsController < ApplicationController
           #{@listing.board_game_name} from you,
             Contact them here to arrange for delivery "
     )
+  end
+
+  def sanitize_params
+    params.permit(:id)
   end
 end

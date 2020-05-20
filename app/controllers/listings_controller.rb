@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
+  before_action :retrieve_all_payments
   load_and_authorize_resource
 
   def index; end
@@ -10,8 +11,8 @@ class ListingsController < ApplicationController
   def new
     # Check if current user has a profile
     if current_user.profile
+      # Initialise a new Listing
       @listing = Listing.new
-      @payments = Payment.all
     else
       flash[:alert] = 'Please create your profile first'
       redirect_to new_profile_path
@@ -55,18 +56,21 @@ class ListingsController < ApplicationController
 
   def update_listing_payment(listing)
     listing.payments.delete_all
-    return unless params[:payment_ids]
+    add_payments
+  end
 
-    params[:payment_ids].each do |p|
-      listing.payments << Payment.find(p)
-    end
+  def retrieve_all_payments
+    # Query the database for all payments options to be added to new listings
+    @payments = Payment.all
   end
 
   def add_payments
     return unless params[:payment_ids]
 
+    # Get all Payment options
+    @payments = Payment.all
     params[:payment_ids].each do |p|
-      @listing.payments << Payment.find(p)
+      @listing.payments << @payments.find(p)
     end
   end
 
@@ -88,6 +92,7 @@ class ListingsController < ApplicationController
   end
 
   def set_listing
+    # Get the Listing from the database with its images and associated payments
     @listing = Listing.with_attached_picture.includes(
       :payments
     ).includes(:profile).find(params[:id])

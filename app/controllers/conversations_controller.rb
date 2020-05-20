@@ -5,19 +5,22 @@ class ConversationsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    # Get all conversation involving current user
     @conversations = Conversation.participating(
       current_user.profile
     ).order('updated_at DESC')
   end
 
   def show
+    # Get an new message as template
     @message = Message.new
   end
 
   private
 
   def set_conversation
-    @conversation = Conversation.find_by(id: params[:id])
+    # get the current convsation and its messages to be displayed
+    @conversation = Conversation.includes(:messages).find_by(id: params[:id])
   end
 
   def check_participating!

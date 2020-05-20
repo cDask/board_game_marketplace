@@ -3,6 +3,7 @@ class PaymentsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
 
   def stripe_id
+    # Get the the Listing from the database
     @listing = Listing.find(params[:id])
     session_id = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
@@ -20,7 +21,9 @@ class PaymentsController < ApplicationController
     payment = Stripe::PaymentIntent.retrieve(payment_id)
     listing_id = payment.metadata.listing_id
     user_id = payment.metadata.user_id
+    # Get listing associated with transaction
     listing = Listing.find(listing_id)
+    # Get the user who initiated teh transation
     user =  User.find(user_id)
     transaction = listing.transactions.new(profile: user.profile)
     transaction.save

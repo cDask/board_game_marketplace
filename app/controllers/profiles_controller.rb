@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    # Get all Profiles for list of profiles
     @profiles = Profile.all
   end
 
@@ -15,14 +16,15 @@ class ProfilesController < ApplicationController
   end
 
   def new
+    # Get a new profile as template
     @profile = Profile.new
   end
 
   def edit; end
 
   def create
-    # TODO: Find out why old method didnt work
     # @profile = current_user.profile.create(profile_params)
+    # Make a new profile using profile_params
     @profile = Profile.new(profile_params)
     @profile.user = current_user
     @profile.save
@@ -54,6 +56,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
+    # Get the profile of that page with its image
     @profile = Profile.with_attached_profile_pic.find(params[:id])
   end
 end
