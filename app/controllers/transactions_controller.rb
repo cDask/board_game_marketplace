@@ -1,11 +1,8 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_listing, except: %i[new review]
+  before_action :find_listing, except: %i[review]
 
   def new
-    @listing = Listing.with_attached_picture.includes(
-      :transactions
-    ).find(params[:listing_id])
     @transaction = @listing.transactions.last
   end
 
@@ -28,7 +25,7 @@ class TransactionsController < ApplicationController
   end
 
   def review
-    @transaction = Transaction.find(params[:id])
+    @transaction = Transaction.includes(:listing).find(params[:id])
     if params[:rating].empty? || params[:review].empty?
       flash[:alert] = 'Please fill in review and rating'
     else
@@ -51,7 +48,9 @@ class TransactionsController < ApplicationController
   end
 
   def find_listing
-    @listing = Listing.find(params[:listing_id])
+    @listing = Listing.with_attached_picture.includes(
+      :transactions
+    ).find(params[:listing_id])
   end
 
   def send_automated_message(_listing)

@@ -4,7 +4,9 @@ class ListingsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @listings = Listing.where(completed: false, deleted: false)
+    @listings = Listing.with_attached_picture.includes(
+      :profile
+    ).where(completed: false, deleted: false)
   end
 
   def show; end
@@ -84,6 +86,8 @@ class ListingsController < ApplicationController
   end
 
   def set_listing
-    @listing = Listing.find(params[:id])
+    @listing = Listing.with_attached_picture.includes(
+      :payments
+    ).includes(:profile).find(params[:id])
   end
 end

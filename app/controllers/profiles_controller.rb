@@ -54,6 +54,6 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
-    @profile = Profile.find(params[:id])
+    @profile = Profile.with_attached_profile_pic.find(params[:id])
   end
 end
