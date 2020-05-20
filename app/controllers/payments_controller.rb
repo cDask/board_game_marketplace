@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:webhook]
+  skip_before_action :verify_authenticity_token, only: [:webhook]
 
   def stripe_id
     @listing = Listing.find(params[:id])
@@ -12,6 +13,19 @@ class PaymentsController < ApplicationController
       cancel_url: "#{root_url}listings"
     ).id
     render_json(session_id)
+  end
+
+  def webhook
+    payment_id = params[:data][:object][:payment_intent]
+    payment = Stripe::PaymentIntent.retrieve(payment_id)
+    listing_id = payment.metadata.listing_id
+    user_id = payment.metadata.user_id
+    listing = Listing.find(listing_id)
+    user =  User.find(user_id)
+    transaction = listing.transactions.new(profile: user.profile)
+    transaction.save
+
+    head 200
   end
 
   def render_json(id)

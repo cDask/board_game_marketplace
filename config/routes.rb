@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   end
   post "/transaction/:id/rating", to: 'transactions#rating', as: 'rating'
   get "/payments/session", to: "payments#stripe_id"
-  get "/payments/success", to: "payments#success"
   post "/payments/webhook", to: "payments#webhook"
   resources :messages, only: [ :new, :create]
   resources :conversations, only: [:index, :show]
