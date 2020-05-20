@@ -27,15 +27,6 @@
     <%= f.select :listing_type, ['Sell','Trade'], id:'listing-type', onChange:'change_payments()' %>
   </div>
 
-  <script type="text/javascript">
-    function change_payments(){
-        console.log('hello');
-      if(document.getElementById('listing-type') == 'Sell'){
-        console.log('hello');
-      } 
-    }
-  </script>
-
   <div id="cash-payment">
     <div class="field">
       <div class="form_row">

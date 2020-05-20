@@ -23,6 +23,7 @@ class ListingsController < ApplicationController
   end
 
   def edit
+    @listing.price /= 100.00
     @payments = @listing.payments
   end
 
@@ -32,6 +33,8 @@ class ListingsController < ApplicationController
     if @listing.errors.any?
       render :new
     else
+      @listing.completed = false
+      @listing.save
       flash[:success] = 'You successfully created a new listing!'
       redirect_to @listing
     end
@@ -72,13 +75,16 @@ class ListingsController < ApplicationController
   end
 
   def listing_params
-    params.require(
+    prms = params.require(
       :listing
     ).permit(
       :board_game_name, :condition, :listing_type,
       :price, :board_game_trade, :description,
       :profile, picture: []
     )
+    # change price to cents
+    prms[:price] = prms[:price].to_f * 100
+    prms
   end
 
   def payment_params
