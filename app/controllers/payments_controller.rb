@@ -8,8 +8,7 @@ class PaymentsController < ApplicationController
       customer_email: current_user.email,
       line_items: stripe_variables(@listing),
       payment_intent_data: payment_intent(@listing),
-      success_url: "#{root_url}payments/success?userId=
-      #{current_user.id}&listingId=#{@listing.id}",
+      success_url: "#{root_url}listings/#{@listing.id}/transactions/new",
       cancel_url: "#{root_url}listings"
     ).id
     render_json(session_id)
