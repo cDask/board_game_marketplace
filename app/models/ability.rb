@@ -7,7 +7,7 @@ class Ability
     user ||= User.new
     profile = user.profile
     profile ||= Profile.new
-    can :manage, :all if user.is_admin?
+    admin_permissions(user)
     listing_permissions(user, profile)
     can %i[edit update destroy], Listing, profile: profile
     profile_permissions(user)
@@ -29,5 +29,13 @@ class Ability
       user.profile.nil?
     end
     can %i[index show edit], Profile, user_id: user.id
+  end
+
+  def admin_permissions(user)
+    return unless user && user.is_admin?
+
+    can :manage, :all
+    can :access, :rails_admin # only allow admin users to access Rails Admin
+    can :read, :dashboard
   end
 end

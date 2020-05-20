@@ -56,3 +56,5 @@ gem "cancancan", "~> 3.1"
 gem "stripe", "~> 5.22"
 
 gem 'ransack', github: 'activerecord-hackery/ransack'
+
+gem 'rails_admin', '~> 2.0'
