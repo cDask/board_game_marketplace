@@ -1,0 +1,12 @@
+<div class="content">
+    <div class="transaction-content transaction-new">
+        
+        <h2>You have <%= @listing.listing_type == 'Sell' ? 'purchased' : 'traded' %> <%= @listing.board_game_name %> for <%= @listing.listing_type == 'Sell' ? number_to_currency(@listing.price) : @listing.board_game_trade %> from <%= @listing.profile.username %></h2>
+        <div class="instructions">
+            <p>A message has been sent to the seller about your <%= @listing.listing_type == 'Sell' ? 'purchase' : 'trade'%>, Please check you messages to arrange delivery.</p>
+            <%= link_to 'Message', new_message_path(receiver_id: @listing.profile), class:'button-blue-1' %>
+        </div>
+        <%= render 'review', transaction:@transaction %>
+    </div>
+</div>
+

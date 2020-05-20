@@ -1,0 +1,8 @@
+<div class="profile">
+    <%= render 'shared/load_profile_pic', profile: profile %>
+        <div class="user-info">
+            <h4><%= profile.username %></h4>
+            <h5><%= profile.rating %></h5>
+        </div>
+    <%= link_to 'Message', new_message_path(receiver_id: profile), class:'button-blue-1' %>
+</div>

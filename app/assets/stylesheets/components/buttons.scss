@@ -1,0 +1,22 @@
+@import "./theme.scss";
+
+.button-blue-1 {
+  text-align: center;
+  margin: 0.2rem;
+  color: white;
+  background: $button-color;
+  text-decoration: none;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  transition: $transition-speed;
+}
+.button-blue-1:hover {
+  background: $button-color-hover;
+}
+
+.remove-submit-styling{
+    text-decoration: none;
+    box-shadow: none;
+    border: none;
+    text-shadow: none;
+}

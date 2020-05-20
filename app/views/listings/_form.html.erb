@@ -1,0 +1,72 @@
+<%= render "shared/form-errors", resource: listing %>
+
+<%= form_with model: listing, local: true, class: "listings-form" do |f| %>
+  <div class="field">
+    <%= f.label :board_game_name %>
+    <%= f.text_field :board_game_name, class:'width-95' %>
+  </div>
+  <div class="field">
+    <%= f.label :condition %>
+    <%= select(:listing, :condition, [
+        'Brand New in Shrink',
+        'Played a few times',
+        'Unplayed but punched',
+        'Missing pieces',
+        'Dented box',
+        'Heavily played'
+        ]) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, class:'width-95' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :listing_type %>
+    <%= f.select :listing_type, ['Sell','Trade'], id:'listing-type', onChange:'change_payments()' %>
+  </div>
+
+  <script type="text/javascript">
+    function change_payments(){
+        console.log('hello');
+      if(document.getElementById('listing-type') == 'Sell'){
+        console.log('hello');
+      } 
+    }
+  </script>
+
+  <div id="cash-payment">
+    <div class="field">
+      <div class="form_row">
+        <label for="payment_ids[]">Payment:</label>
+        <% for payment in Payment.all do %>
+          <br><%= check_box_tag 'payment_ids[]', payment.id,
+                  listing.payment_ids.include?(payment.id) %>
+          <%= payment.name.humanize %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :price %>
+      <%= f.number_field :price, in: 0.5..1000000.0, step: 0.5, class:'width-95' %>
+    </div>
+  </div>
+
+  <div id="trade-payments">
+    <div class="field">
+      <%= f.label :board_game_trade, 'Board Game You Want to Trade for' %><br />
+      <%= f.text_field :board_game_trade, class:'width-95' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :picture %><br />
+    <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg', multiple: true %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit 'Save Listing', class:'button-blue-1 remove-submit-styling'%>
+  </div>
+<% end %>

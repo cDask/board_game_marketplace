@@ -5,7 +5,7 @@ RSpec.describe Listing, type: :model do
   subject { described_class.new(
     board_game_name: 'test',
     condition: 'Brand New in Shrink',
-    listing_type: 'Money',
+    listing_type: 'Sell',
     price: 10000,
     board_game_trade: nil,
     description: "Awesome game",
@@ -50,8 +50,8 @@ RSpec.describe Listing, type: :model do
       expect(new_listing.completed).to eq false
     end
 
-    it 'is not valid if listing type is money and price is nil' do
-      subject.listing_type = 'Money'
+    it 'is not valid if listing type is Sell and price is nil' do
+      subject.listing_type = 'Sell'
       subject.price = nil
       expect(subject).to_not be_valid
     end
@@ -62,7 +62,7 @@ RSpec.describe Listing, type: :model do
       expect(subject).to_not be_valid
     end
 
-    it 'is not valid if listing type is anything other than Trade or Money' do
+    it 'is not valid if listing type is anything other than Trade or Sell' do
       subject.listing_type = 'Cash'
       expect(subject).to_not be_valid
     end

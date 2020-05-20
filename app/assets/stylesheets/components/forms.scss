@@ -1,0 +1,50 @@
+@import "./theme.scss";
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    margin-bottom: 1rem;
+    font-family: $title2;
+    color: $button-color;
+  }
+  form {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    border: 1px grey solid;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: $box-shadow;
+    .field {
+      margin: 0.35rem 0px;
+      display: flex;
+      flex-direction: column;
+      input, textarea, select{
+        margin-top: 5px;
+        border-radius: 0.25rem;
+        padding: 0.25rem;
+      }
+    }
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      input {
+        font-size: 1em;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  }
+  .links {
+    margin-top: 10px;
+    min-width: 100px;
+    display: flex;
+    flex-flow: column;
+  }
+}
+.width-95 {
+  width: 95%;
+}

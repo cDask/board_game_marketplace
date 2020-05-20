@@ -1,0 +1,39 @@
+// Place all the styles related to the conversations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.message-header{
+    background-color: crimson;
+    color: white;
+    text-align: center;
+    padding: 10px;
+
+}
+
+.single-conv{
+    width: 100vw;
+    display: flex;
+    padding: 10px 0px;
+    border-bottom: 1px solid crimson;
+    .profile-pic-sm{
+        img{
+            padding: 0px 5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+    .conv{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: calc(100% - 50px);
+        .brief-conv{
+            display: flex;
+            flex-flow: column;
+        }
+        a{
+            padding: 0px 5px;
+        }
+    }
+}

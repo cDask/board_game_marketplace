@@ -1,0 +1,31 @@
+<%= link_to listing, class:'card' do %>
+    <div class="title">
+        <%= listing.board_game_name %>
+    </div>    
+    <% if listing.picture.attached? %>
+        <div class="pic" style="background-image: url(<%= rails_blob_url(listing.picture.first) %>)"></div>
+        <%#= image_tag listing.picture.first,class:'pic'%>
+    <% else %>
+        <div class="pic default-background"></div>
+        <%#= image_tag "default/default_board_game.jpg", alt: "Default picture of board game", class:'pic' %>
+    <% end %>
+    <div class="prf-pic">
+        <%= render 'shared/load_profile_pic', profile: listing.profile %>
+    </div>
+    <div class="poster">
+        <%=  listing.profile.username %>
+    </div>
+    <div class="rating">
+        <%= listing.profile.rating %>
+    </div>
+    <div class="condition">
+        <%= listing.condition %>
+    </div>
+    <div class="price">
+        <% if listing.listing_type == 'Sell' %>
+            <%= number_to_currency(listing.price/100) %>
+        <% elsif listing.listing_type == 'Trade' %>
+            Trade for: <%= listing.board_game_trade %>
+        <% end %>
+    </div>
+<% end %>

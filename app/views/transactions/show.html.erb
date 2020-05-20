@@ -1,0 +1,24 @@
+<div class="content">
+    <h2>
+        <%= @listing.listing_type == 'Trade' ? 'Traded' : 'Purchased' %>
+        <%= @listing.board_game_name %>
+        for 
+        <%= @listing.listing_type == 'Trade' ? @listing.board_game_trade : number_to_currency(@listing.price)  %>
+    </h2>
+    <%= render 'shared/flash-messages' %>
+    <div class="transaction-content">
+        <section>
+            <h4>Purchased on:</h4>
+            <h5><%= @transaction.created_at %></h5>
+                <%= link_to 'View Listing', @listing, class:'blue-button-1' %>
+        </section>
+        <section>
+            <h4> Purchased from: </h4>
+            <%= render 'shared/load-profile', profile: @listing.profile %>
+        </section>
+        <section class='form-content'>
+            <%= render 'review', transaction:@transaction %>
+        </section>
+    </div>
+    <%= link_to 'Back', :back, class:'button-blue-1' %>
+</div>

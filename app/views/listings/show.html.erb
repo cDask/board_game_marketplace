@@ -1,0 +1,59 @@
+<h2><%= @listing.board_game_name %></h2>
+<%= render 'shared/flash-messages' %>
+<div class="listing-grid">
+  <% if @listing.picture.attached? %>
+    <%= image_tag @listing.picture[0], class:"main-image", id: 'image-focus'%>
+    <div class="image-slides">
+      <% count = 0 %>
+      <% @listing.picture.each do |pic| %>
+        <%= image_tag pic, class: 'thumbnail', id: count, onClick:'change_picture(this.id)'%>
+        <% count += 1 %>
+      <% end %>
+    </div>
+  <% else %>
+    <%#= image_tag "default/default_board_game.jpg", alt: "Default picture of board game", class:'main-image' %>
+    <div class="main-image default-background"></div>
+  <% end %>
+  <script type="text/javascript">
+    function change_picture(clicked){
+      document.getElementById('image-focus').src=document.getElementById(clicked).src; 
+    }
+  </script>
+  
+  <%= render 'shared/load-profile', profile: @listing.profile %>
+
+  <div class="condition">
+    <h4>Condition:</h4>
+    <p class='desc'><%= @listing.condition %></p>
+  </div>
+
+  <div class="description">
+    <h4>Description:</h4>
+    <p class='desc'><%= @listing.description %></p>
+  </div>
+
+  <div class="price">
+    <h4>Price:</h4>
+    <p class='desc'><%= number_to_currency(@listing.price / 100.0) %></p>
+  </div>
+    
+  <div class="payment-options">
+    <h4>Payment Options:</h4>
+      <% unless @listing.completed %>
+        <% if @listing.payments.pluck(:name).include?('Cash') %>
+          <%= link_to 'Pay with Cash', listing_transactions_path(@listing.id), class:'button-blue-1', method: :post %>
+        <% end %>
+        <% if @listing.payments.pluck(:name).include?('Stripe') %>
+          <%= link_to "Pay with Card", "", id: "stripe", class:'button-blue-1' %>
+        <% end %>
+      <% end %>
+  </div>
+  <div class="links">
+    <% if user_signed_in? && current_profile && current_profile.id == @listing.profile_id %>
+      <%= link_to "Edit", edit_listing_path(@listing.id), class:'button-blue-1'%>
+      <%= link_to "Delete", listing_path(@listing.id), method: :delete, class:'button-blue-1' %>
+    <% end %>
+    <%= link_to "Back", :back, class: 'button-blue-1' %>
+  </div>
+</div>
+<%= javascript_pack_tag "stripe" %>

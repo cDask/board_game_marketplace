@@ -15,3 +15,16 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+function stripeFunction(){
+    const id = location.pathname.split("/")[2]
+    fetch(`/payments/session?id=${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      const stripe = Stripe(data.stripe_public_key);
+      stripe.redirectToCheckout({
+        sessionId: data.id
+      })
+    })
+  }

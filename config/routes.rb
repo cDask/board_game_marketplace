@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  root to: "listings#index"
+  devise_for :users, controllers: { registrations: "registrations" }
+  resources :profiles
+  resources :listings do
+    resources :transactions, only: [:new,:create,:show,:update]
+  end
+  post "/transaction/:id/review", to: 'transactions#review', as: 'review'
+  get "/payments/session", to: "payments#stripe_id"
+  get "/payments/success", to: "payments#success"
+  post "/payments/webhook", to: "payments#webhook"
+  resources :messages, only: [ :new, :create]
+  resources :conversations, only: [:index, :show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # root to: "users#index"
 end

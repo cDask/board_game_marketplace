@@ -1,0 +1,19 @@
+@import './theme.scss';
+
+
+.flash-messages{
+    .success{
+        background-color: darkgreen;
+        color: white;
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+    .alert{
+        background-color: $accent-colour;
+        color: white;
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+}

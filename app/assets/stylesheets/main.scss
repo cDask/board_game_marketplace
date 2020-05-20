@@ -1,0 +1,73 @@
+@import "./theme.scss";
+
+* {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  font-family: $general;
+}
+header{
+  background: $dark;
+  color: white;
+  text-align: center;
+  font-size: small;
+  font-family: $title3;
+  padding: 0.5rem 0;
+  height: $topMargin;
+}
+
+main{
+  margin-bottom: 4.5rem;
+}
+.add-listing{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 5.5rem;
+  right: 25px;
+  border-radius: 50%;
+  background: $dark;
+  color: white;
+  font-size: x-large;
+  width: 40px;
+  height: 40px;
+  transition: $transition-speed;
+  .add-text{
+    display: none;
+  }
+}
+.add-listing:hover{
+  background-color: $accent-colour;
+}
+/* Large screens */
+@media only screen and (min-width: 600px) {
+  header{
+    font-size: x-large;
+    margin-left: 5rem;
+  }
+  main {
+    margin-bottom: 0;
+    margin-left: 5rem;
+  }
+  .add-listing{
+    bottom: 25px;
+    right: 25px;
+    width: 150px;
+    border-radius: 20px;
+    font-size: large;
+    .add-text{
+      display: initial;
+    }
+  }
+}
+@media only screen and (min-width: 1224px) {
+  header{
+    margin-left: 14rem;
+  }
+
+  main {
+    margin-bottom: 0;
+    margin-left: 14rem;
+  }
+}
