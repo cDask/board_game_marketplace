@@ -10,7 +10,7 @@
   padding: 0.5rem;
   transition: $transition-speed;
 }
-.button-blue-1:hover {
+.button-blue-1:hover, .search:hover {
   background: $button-color-hover;
 }
 
@@ -19,4 +19,15 @@
     box-shadow: none;
     border: none;
     text-shadow: none;
+}
+.search{
+  text-align: center;
+  margin: 0.2rem;
+  color: white;
+  background: $accent-colour;
+  text-decoration: none;
+  border-radius: 1rem;
+  padding: 0.3rem;
+  transition: $transition-speed;
+  font-size: medium;
 }

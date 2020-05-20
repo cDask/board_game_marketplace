@@ -7,6 +7,7 @@
   font-family: $general;
 }
 header{
+  position: sticky;
   background: $dark;
   color: white;
   text-align: center;
@@ -14,6 +15,9 @@ header{
   font-family: $title3;
   padding: 0.5rem 0;
   height: $topMargin;
+  form{
+    
+  }
 }
 
 main{
@@ -40,6 +44,7 @@ main{
 .add-listing:hover{
   background-color: $accent-colour;
 }
+
 /* Large screens */
 @media only screen and (min-width: 600px) {
   header{

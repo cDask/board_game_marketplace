@@ -3,11 +3,7 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   load_and_authorize_resource
 
-  def index
-    @listings = Listing.with_attached_picture.includes(
-      :profile
-    ).where(completed: false, deleted: false)
-  end
+  def index; end
 
   def show; end
 

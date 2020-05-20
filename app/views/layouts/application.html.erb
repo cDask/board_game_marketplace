@@ -12,7 +12,12 @@
 
   <body>
     <%= render 'shared/nav' %>
-    <header>Board Games Exchange</header>
+    <header>
+      <%= search_form_for @q do |f| %>
+        <%= f.search_field :board_game_name_or_description_or_condition_or_listing_type_cont, class:'search-field' %>
+        <%= f.submit 'search', class:"search remove-submit-styling" %>
+      <% end %>
+  </header>
     <main>
       <%= yield %>
       <%= link_to new_listing_path, class: "add-listing" do %>

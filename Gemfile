@@ -54,3 +54,5 @@ gem "aws-sdk-s3", "~> 1.64"
 gem "cancancan", "~> 3.1"
 
 gem "stripe", "~> 5.22"
+
+gem 'ransack', github: 'activerecord-hackery/ransack'

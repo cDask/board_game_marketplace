@@ -40,7 +40,7 @@
         </li>
         <li class="nav-item">
             <% if user_signed_in? %>
-                <% if !current_profile.errors.any?  %> 
+                <% if current_profile && !current_profile.errors.any?  %> 
                     <%= link_to profile_path(current_profile), class:'nav-link' do %>
                     <%= render 'shared/load_profile_pic', profile: current_profile %>
                     <span class="link-text"><%= current_profile.username %></span>
