@@ -31,7 +31,7 @@
     <div class="field">
       <div class="form_row">
         <label for="payment_ids[]">Payment:</label>
-        <% for payment in @payments do %>
+        <% for payment in @all_payments do %>
           <br><%= check_box_tag 'payment_ids[]', payment.id,
                   listing.payment_ids.include?(payment.id) %>
           <%= payment.name.humanize %>

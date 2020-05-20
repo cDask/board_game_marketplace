@@ -221,7 +221,8 @@ A lot of the functionality of the market place has been implemented from various
 - CanCanCan - CanCanCan is a ruby gem that allows us to manage access of our website so that unauthorized access isn't being made by malicious individuals. This provides our website with better security and a smoother user experience.
 - Rspec - Rspec is a Ruby testing library which has been implemented and used briefly to make unit testing for models implemented. This ensures correct user functionality and better quality assurance.
 - Rubocop - Rubocop is a Ruby linter that has been used in order to make sure code adhere to a uniform structure. This ensures more organised cleaner code which is less prone to errors.
-- Ransack - A ruby gem known as ransack was used in order to implement the search function available within the app.
+- Ransack - A ruby gem known as ransack was used in order to implement the search function available within the app
+- Rails Admin - Rails admin gives us a admin dashboard for our admin users. This gives the admins greater control of the database and websites.
 
 ### Task Management
 

@@ -39,12 +39,16 @@
     
   <div class="payment-options">
     <h4>Payment Options:</h4>
-      <% unless @listing.completed %>
-        <% if @listing.payments.pluck(:name).include?('Cash') %>
-          <%= link_to 'Pay with Cash', listing_transactions_path(@listing.id), class:'button-blue-1', method: :post %>
-        <% end %>
-        <% if @listing.payments.pluck(:name).include?('Stripe') %>
-          <%= link_to "Pay with Card", "", id: "stripe", class:'button-blue-1' %>
+      <% unless @listing.completed || current_user && current_profile && @listing.profile == current_profile%>
+        <% if @listing.listing_type == 'Sell' %>
+          <% if @listing.payments.pluck(:name).include?('Cash') %>
+            <%= link_to 'Pay with Cash', listing_transactions_path(@listing.id), class:'button-blue-1', method: :post %>
+          <% end %>
+          <% if @listing.payments.pluck(:name).include?('Stripe') %>
+            <%= link_to "Pay with Card", "", id: "stripe", class:'button-blue-1' %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Trade', listing_transactions_path(@listing.id), class:'button-blue-1', method: :post %>
         <% end %>
       <% end %>
   </div>

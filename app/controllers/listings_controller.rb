@@ -61,7 +61,7 @@ class ListingsController < ApplicationController
 
   def retrieve_all_payments
     # Query the database for all payments options to be added to new listings
-    @payments = Payment.all
+    @all_payments = Payment.all
   end
 
   def add_payments
