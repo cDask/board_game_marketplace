@@ -27,6 +27,9 @@ class ProfilesController < ApplicationController
     # Make a new profile using profile_params
     @profile = Profile.new(profile_params)
     @profile.user = current_user
+    # Temp Solution to make default work on Heroku
+    # until can fix schema and migrations
+    @profile.rating = 500
     @profile.save
     if @profile.errors.any?
       render :new
