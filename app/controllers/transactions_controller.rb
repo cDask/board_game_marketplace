@@ -4,6 +4,10 @@ class TransactionsController < ApplicationController
 
   def new
     @transaction = @listing.transactions.last
+    return unless @transaction.nil?
+
+    flash[:alert] = 'Payment Failure'
+    redirect_to @listing
   end
 
   def show
