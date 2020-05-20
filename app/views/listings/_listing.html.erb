@@ -3,7 +3,8 @@
         <%= listing.board_game_name %>
     </div>    
     <% if listing.picture.attached? %>
-        <%= image_tag listing.picture.first,class:'pic'%>
+        <div class="pic" style="background-image: url(<%= rails_blob_url(listing.picture.first) %>)"></div>
+        <%#= image_tag listing.picture.first,class:'pic'%>
     <% else %>
         <div class="pic default-background"></div>
         <%#= image_tag "default/default_board_game.jpg", alt: "Default picture of board game", class:'pic' %>
