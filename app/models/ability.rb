@@ -14,6 +14,7 @@ class Ability
     profile_permissions(user)
     can :manage, Conversation, author_id: profile.id
     can :manage, Conversation, receiver_id: profile.id
+    can %i[new create], Message
   end
 
   def listing_permissions(_user, profile)

@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_profile
   before_action :find_listing, except: %i[rating]
 
   def new
@@ -89,5 +90,12 @@ class TransactionsController < ApplicationController
 
   def sanitize_params
     params.permit(:id)
+  end
+
+  def check_profile
+    return if current_user.profile
+
+    flash[:alert] = 'Please create your profile first'
+    redirect_to new_profile_path
   end
 end

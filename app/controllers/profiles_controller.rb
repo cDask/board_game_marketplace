@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @listings = @profile.listings
+    @listings = @profile.listings.where(deleted: false)
     @active_listings = @listings.reject(&:completed)
     @past_listings = @listings.select(&:completed)
     @transactions = @profile.transactions

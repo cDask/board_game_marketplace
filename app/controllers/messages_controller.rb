@@ -1,10 +1,18 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_profile
+  load_and_authorize_resource
   before_action :find_conversation!
 
   def new
     redirect_to(conversation_path(@conversation)) && return if @conversation
 
-    @message = current_user.profile.messages.new
+    if params[:receiver_id].to_i == current_user.profile.id
+      flash[:alert] = 'Cant start conversation with yourself'
+      redirect_to root_path
+    else
+      @message = current_user.profile.messages.new
+    end
   end
 
   def create
@@ -35,6 +43,13 @@ class MessagesController < ApplicationController
       )
       error_check
     end
+  end
+
+  def check_profile
+    return if current_user.profile
+
+    flash[:alert] = 'Please create your profile first'
+    redirect_to new_profile_path
   end
 
   def error_check
