@@ -2,6 +2,7 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_profile
   before_action :find_listing, except: %i[rating]
+  after_action :new_status, only: %i[new]
 
   def new
     @transaction = @listing.transactions.last
@@ -46,6 +47,8 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+  def new_status; end
 
   def payment_intent
     {

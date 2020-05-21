@@ -26,6 +26,7 @@ class ConversationsController < ApplicationController
   def check_participating!
     return if @conversation && @conversation.participates?(current_user.profile)
 
+    flash[:alert] = 'Unauthorized Access'
     redirect_to root_path
   end
 end

@@ -54,7 +54,9 @@
   </div>
   <div class="links">
     <% if user_signed_in? && current_profile && current_profile.id == @listing.profile_id %>
-      <%= link_to "Edit", edit_listing_path(@listing.id), class:'button-blue-1'%>
+      <% if @listing.completed || @listing.deleted %>
+        <%= link_to "Edit", edit_listing_path(@listing.id), class:'button-blue-1'%>
+      <% end %>
       <%= link_to "Delete", listing_path(@listing.id), method: :delete, class:'button-blue-1' %>
     <% end %>
     <%= link_to "Back", :back, class: 'button-blue-1' %>
