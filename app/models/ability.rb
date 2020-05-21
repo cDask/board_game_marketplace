@@ -33,7 +33,7 @@ class Ability
       user.profile.nil?
     end
     cannot %i[index], Profile
-    can %i[show edit], Profile, user_id: user.id
+    can %i[show edit update], Profile, user_id: user.id
   end
 
   def admin_permissions(user)

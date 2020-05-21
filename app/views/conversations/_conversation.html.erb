@@ -8,6 +8,6 @@
       <strong><%= conversation.with(current_user.profile).username %></strong>
       <p><%= conversation.messages.last.profile.username %>: <em><%= conversation.messages.last.body.truncate(50) %></em></p>
     </div>
-    <%= link_to 'View', conversation_path(conversation) %>
+    <%= link_to 'View', conversation_path(conversation), class:'button-blue-1' %>
   </div>
 </div>

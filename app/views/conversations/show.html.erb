@@ -1,7 +1,7 @@
-<header class="message-header"><%= @conversation.with(current_user.profile).username %></header>
+<div class="message-header"><%= @conversation.with(current_user.profile).username %></div>
 
 <div id="conversation-main">
-  <div id="conversation-body">
+  <div id="conversation-body" class="chat">
     <%= render @conversation.messages %>
   </div>
 
@@ -9,6 +9,6 @@
     <%= hidden_field_tag 'conversation_id', @conversation.id %>
     <%= f.text_field :body %>
 
-    <%= f.submit %>
+    <%= f.submit 'Send', class: 'button-blue-1 chat-input'%>
   <% end %>
 </div>

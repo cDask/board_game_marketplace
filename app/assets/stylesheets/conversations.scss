@@ -1,19 +1,22 @@
 // Place all the styles related to the conversations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import './theme.scss';
+
 .message-header{
-    background-color: crimson;
+    background-color: $accent-colour;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 10px 0;
+    width: 100%;
 
 }
 
 .single-conv{
-    width: 100vw;
+    width: 100%;
     display: flex;
     padding: 10px 0px;
-    border-bottom: 1px solid crimson;
+    border-bottom: 1px solid $accent-colour;
     .profile-pic-sm{
         img{
             padding: 0px 5px;
@@ -36,4 +39,24 @@
             padding: 0px 5px;
         }
     }
+}
+
+.chat {
+    border: 1px solid lighten($dark, 40%);
+    background: lighten($dark, 50%);
+    height: 80vh;
+    border-radius: 5px 5px 0 0;
+    overflow-y: auto;
+}
+
+.chat-input {
+border-top: 0 none;
+border-radius: 0 0 5px 5px;
+}
+
+@media only screen and (min-width: 600px) {
+
+}
+@media only screen and (min-width: 1224px) {
+
 }

@@ -1,14 +1,42 @@
 @import "./theme.scss";
 
-.button-blue-1 {
+.button-blue-1{
   text-align: center;
   margin: 0.2rem;
   color: white;
-  background: $button-color;
   text-decoration: none;
   border-radius: 1rem;
   padding: 0.5rem;
   transition: $transition-speed;
+}
+.button-red-1, .button-green-1, .button-yellow-1{
+  color: white;
+  padding: 0.2rem;
+}
+
+.button-blue-1{
+  background: $button-color;  
+}
+.button-red-1{
+  margin: 0px;
+  background: $accent-colour;
+}
+.button-green-1{
+  margin: 0px;
+  background: $button-color;
+} 
+.button-yellow-1{
+  margin: 0px;
+  background: $button-color;
+}
+.button-red-1:hover{
+  background: $accent-colour;
+}
+.button-green-1:hover{
+  background: $button-color;
+} 
+.button-yellow-1:hover{
+  background: $button-color;
 }
 .button-blue-1:hover, .search:hover {
   background: $button-color-hover;

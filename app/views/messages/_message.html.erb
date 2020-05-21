@@ -1,4 +1,15 @@
-<p><%= message.body %></p>
-<p>at <strong><%= message.created_at %></strong><br>
-  by <strong><%= message.profile.username %></strong></p>
-<hr>
+<% if message.profile == current_profile %>
+  <div class="my-message">
+    <p><%= message.body %></p>
+    <p>at <strong><%= message.created_at %></strong><br>
+      by <strong><%= message.profile.username %></strong></p>
+    <hr>
+  </div>
+<% else %>
+  <div class="their-message">
+    <p><%= message.body %></p>
+    <p>at <strong><%= message.created_at %></strong><br>
+      by <strong><%= message.profile.username %></strong></p>
+    <hr>
+  </div>
+<% end %>
