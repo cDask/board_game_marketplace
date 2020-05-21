@@ -25,7 +25,8 @@ class PaymentsController < ApplicationController
     listing = Listing.find(listing_id)
     # Get the user who initiated teh transation
     user =  User.find(user_id)
-    transaction = listing.transactions.new(profile: user.profile)
+    transaction = Transaction.new(profile: user.profile)
+    transaction.listing = listing
     transaction.save
 
     head 200
