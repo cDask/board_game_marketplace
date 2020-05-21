@@ -2,10 +2,12 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_profile
   before_action :find_listing, except: %i[rating]
-  after_action :new_complete, only: %i[new]
+  load_and_authorize_resource :listing
+  load_and_authorize_resource :transactions, through: :listing,
+                                             through_association: :order
 
   def new
-    @transaction = @listing.transactions.last
+    @transaction = @listing.order
     return unless @transaction.nil?
 
     flash[:alert] = 'Payment Failure'
@@ -15,18 +17,18 @@ class TransactionsController < ApplicationController
   def show
     # Get the listing
     @listing = Listing.with_attached_picture.includes(
-      :transactions
+      :order
     ).find(params[:listing_id])
-    @transaction = @listing.transactions.last
+    @transaction = @listing.order
   end
 
   def create
-    # Create a new listing
+    # Create a new transaction
     @transaction = Transaction.new(
       listing_id: params[:listing_id], profile: current_user.profile
     )
     if @transaction.save
-      send_automated_message(@listing)
+      send_automated_message
     else
       flash[:alert] = 'Something Went Wrong'
       render listing_path(params[:listing_id])
@@ -48,25 +50,19 @@ class TransactionsController < ApplicationController
 
   private
 
-  def new_complete; end
-
-  def payment_intent
-    {
-      metadata: {
-        user_id: current_user.id,
-        listing_id: @listing.id
-      }
-    }
+  def new_complete
+    @transaction.completed = true
+    @transaction.save
   end
 
   def find_listing
     # Get the listing with images and connected transaction
     @listing = Listing.with_attached_picture.includes(
-      :transactions
+      :order
     ).find(params[:listing_id])
   end
 
-  def send_automated_message(_listing)
+  def send_automated_message
     @listing.completed = true
     @listing.save
     # Gets the conversation between current user and the poster of the listing

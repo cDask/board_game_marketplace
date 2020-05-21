@@ -13,6 +13,7 @@ class Ability
     can :manage, Conversation, author_id: profile.id
     can :manage, Conversation, receiver_id: profile.id
     can %i[new create], Message
+    can [:show], Transaction, profile: profile
     admin_permissions(user)
   end
 
@@ -21,7 +22,7 @@ class Ability
     can %i[edit update destroy], Listing, profile: profile
     cannot %i[edit], Listing, completed: true
     cannot [:show], Listing do |listing|
-      listing.deleted && !profile.transactions.pluck(
+      listing.deleted && !profile.transaction.pluck(
         :listing_id
       ).include?(listing.id)
     end

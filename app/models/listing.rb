@@ -1,6 +1,7 @@
 class Listing < ApplicationRecord
   belongs_to :profile
-  has_many :transactions
+  has_one :order, foreign_key: 'listing_id',
+                  class_name: 'Transaction', inverse_of: 'listing'
   has_many :listing_payments
   has_many :payments, through: :listing_payments
   has_many_attached :picture
