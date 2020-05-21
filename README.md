@@ -2,6 +2,7 @@
 
 - [README](#readme)
   - [Links](#links)
+  - [Requirements](#requirements)
   - [Brief](#brief)
     - [Problem](#problem)
     - [User Stories](#user-stories)
@@ -31,36 +32,47 @@
       - [Day 6 - Saturday 16/05/2020](#day-6---saturday-16052020)
       - [Day 7 - Sunday 17/05/2020](#day-7---sunday-17052020)
       - [Day 8 - Monday 18/05/2020](#day-8---monday-18052020)
-      - [Day 9 - Monday 19/05/2020](#day-9---monday-19052020)
-      - [Day 10 - Monday 20/05/2020](#day-10---monday-20052020)
-      - [Day 11- Monday 21/05/2020](#day-11--monday-21052020)
+      - [Day 9 - Tuesday 19/05/2020](#day-9---tuesday-19052020)
+      - [Day 10 - Wednesday 20/05/2020](#day-10---wednesday-20052020)
+      - [Day 11- Thursday 21/05/2020](#day-11--thursday-21052020)
+      - [Day 11- Thursday 21/05/2020 -FINAL](#day-11--thursday-21052020--final)
   - [End Product](#end-product)
     - [Purpose](#purpose)
     - [Functionality / features](#functionality--features)
     - [Sitemap](#sitemap)
     - [Screenshots](#screenshots)
+      - [Listings/home Page](#listingshome-page-1)
+      - [Listing Show Page](#listing-show-page)
+      - [User Dashboard](#user-dashboard)
+      - [Conversations](#conversations)
+      - [Chat](#chat)
+      - [Transaction](#transaction)
     - [Target audience](#target-audience)
     - [Tech stack (e.g. html, css, deployment platform, etc)](#tech-stack-eg-html-css-deployment-platform-etc)
-  - [Explain the different high-level components (abstraction)](#explain-the-different-high-level-components-abstraction)
-  - [Code comments](#code-comments)
-  - [Q19 and Q14 combine](#q19-and-q14-combine)
-- [BUGS](#bugs)
 
 ## Links
 
 [Find the Github link here](https://github.com/cDask/board_game_marketplace)
 
-[Find the website link here](https://boardgamesexchange.herokuapp.com/)
+[Find the website link here](https://boardgamesoverflow.herokuapp.com/)
+
+## Requirements
+
+In order to run this application a few credentials are required as they are not provided with this submission. 
+
+This project makes use of the Stripe API and as such stripe credentials are required to run it.
+
+This project also makes use of AWS S3 bucket for photo storage but has been configured to hold images locally in development however AWS credentials may be required.
 
 ## Brief
 
 ### Problem
 
-As a strong board gamer I have been part of a facebook board game group for quite sometime and have realised there is quite a large market for selling and buying new and second hand board games. This board game group is quite small and exclusive to australia only. Its all based on honour rules and posts where anyone wanting to sell something takes a picture or few and post them with description of the game and prices offering. They would also specify if they rather trade for another game and if they only want locals that can pick up or willing to post interstate.
+As a passionate board gamer I have been part of a facebook board game group for quite sometime and have realised there is quite a large market for selling and buying new and second hand board games. This board game group is quite small and exclusive to australia only. Its all based on honour rules and listings are structured in the form of posts where anyone wanting to sell something takes a picture or few and post them with a description and price of the games being offered. They would also specify if they rather trade for another game as well whether they only want locals that has the ability pick up the game without postage.
 
-Although its a great place to find board games it has many drawbacks. First of all its all cash transaction or bank transfer arranged between the buying and selling parties. The posting on the page is temperamental with people often having trouble with images and getting their text approved by facebook. Another problem is there is no sorting and poor searching meaning that if you post something and nobody sees it may get buried in other posts and make it even harder for people who are interested in getting your game miss it completely.
+Although its a great place to find board games it has many drawbacks. First of all its all cash transaction or bank transfer arranged between the buying and selling parties. The posting on the page is temperamental with people often having trouble with images and getting their text approved by facebook. Another problem is, there is no sorting and poor searching meaning that if you post something and nobody sees it may get buried in other posts and make it even harder for people who are interested in getting your game miss it completely. There is also barely any uniformity or structure meaning each post may be different and can be difficult to navigate as well as understand whats being offered.
 
-As described above a more dedicated platform would be useful and is the reason for the development of my market place. Although there are many out there many can be quite hard to navigate or not focused on the selling and buying and therefore buried in a website (such as boardgamegeek.com). Hopefully my solution will give a clean simple and easy way to  post and sell your board games online. With easier navigation and different payment options.
+As described above a more dedicated platform would be useful and is the reason for the development of my market place. Although there are many out there a lot of them are quite hard to navigate or not focused on the selling and buying and therefore buried deeper in their website (such as boardgamegeek.com). Hopefully my solution will give a clean simple and easy way to post and sell your board games online, with easier navigation and different payment options.
 
 ### User Stories
 
@@ -72,7 +84,7 @@ User stories help determine the functionality and purpose of the app and are lis
 
 - As a signed in user, I want to be able to find and see my conversations so I can easily get back to them.
 
-- As a signed user I would like to be able to view my transaction history and listings so I can keep track on what I have bought and listed.
+- As a signed in user I would like to be able to view my transaction history and listings so I can keep track on what I have bought and listed.
 
 - As a board game seller, I want to be able to upload one or many pictures of my boardgames to easily show potential buyers clearly the game on sale.
   
@@ -80,7 +92,7 @@ User stories help determine the functionality and purpose of the app and are lis
   
 - As a board game seller, I should be able to sign up so that I feel my listings are secure and cant be tampered with unless they have my login.
   
-- As a board game seller, I should be able to list my board game as a trade in case I would rather get a new game than to get cash.
+- As a board game seller, I should be able to list my board game as a trade, in case I would rather get a new game than to get cash.
 
 - As a board game seller, I want to be able to post my games with a choice of payment options so that I may choose a payment option im comfortable with.
 
@@ -92,13 +104,13 @@ User stories help determine the functionality and purpose of the app and are lis
 
 ### Wire frames
 
-Below are all the wire frames made at the start of the project. The design has changed slightly the how and why will be explained below each image.
+Below are all the wire frames made at the start of the project. The design has changed slightly the how and why are explained below each image.
 
 #### Listings/Home page
 
 ![Listing/Home Page](./docs/Listings.png)
 
-The thing that has changed the most is the navbar. First of all the large user icon has been removed, the links has been reduced and shifted to be together at the top apart from the user which is still situated at the bottom. As for the mobile view its stayed the same apart from changing some of the navigation option and the omission of a logo. 
+The thing that has changed the most is the navbar. First of all the large user icon has been removed, the links has been reduced and shifted to be together at the top, apart from the user which is still situated at the bottom. As for the mobile view its stayed the same apart from changing some of the navigation option and the omission of a logo. 
 
 Most of the these changes was to reduce clutter and make it more minimalist to both look at and design. The logo image was never implemented due to time constraints as had more pressing matters than design a logo.
 
@@ -179,18 +191,18 @@ On the other side of the ERD we have the tables associated with the internal mes
 
 As seen from above each table has been implemented as models in the rails app. Below is a descriptions of each model and its relationships.
 
-- User - This is the authentication model that handles passwords usernames and admin status its main purpose is an entry point for users and to provide a secure way for user access the website. It has one relationship with the profile model in which a User has on Profile and a profile is dependent on User.
+- User - This is the authentication model that handles passwords usernames and admin status its main purpose is that it functions as an entry point for users and to provide secure access to the website. It has one relationship with the profile model. A User has one Profile and a profile is dependent on a User.
 - Profile - This model holds the more general information about our users such as profile pic and current rating and username. This is to give a more personalised experience when using the website. Profile belongs to one User and is dependent on having a User model attached to it. Profile is also associated with the Conversation, Message, Listing, Transaction and ActiveStorage models. Each of these relationships are has_many apart from ActiveStorage which holds the profile pic on AWS is a has_one
 - Listing - Listing models holds listing information or the board games which are to be sold or traded. Each Listing belongs to a Profile which signify the poster of that Listing. Listing also has a many to many relationships with the Payment model through a join table. This is so a Listing can have many different payment options and each Payment options can have many Listings. Listing also has a has one relationship with Transaction model which signify each Listing only being sold once.
-- Payments - The Payments model simply hold the payment options and provide them as options for the Listing model. It has been separated as a model rather than an enumerable as this allows for addition of more payment types in the future such as google pay and paypal.
+- Payments - The Payments model simply hold the payment options and provide them as options for the Listing model. It has been separated as a model rather than an enumerable as this allows for the addition of more payment types in the future such as google pay and paypal.
 - ListingPayments - This is a join table that allows for the many to many relationships between Payments and Listings. It belongs to one listing and one Payment.
-- Transaction - The transaction model represents the purchase or trade of a Listing as such belongs to one Listing of which represents the product being sold and one Profile representing the buyer of that product. This model is only generated once a Listing has been purchased.
+- Transaction - The transaction model represents the purchase or trade of a Listing and as such belongs to one Listing of which represents the product being sold and one Profile representing the buyer of that product. This model is only generated once a Listing has been purchased.
 - Conversations - This model represents the Conversations taking place between two different individual Profiles as such it has a belongs to relationship with two different Profile models. It also has a has many relationship with the Message model that holds the messages being sent from the participants of the conversation.
 - Message - The Message model holds the messages for conversations and belongs to one Conversation and one Profile. The Profile represents the messenger and Conversation is the conversation this message is part of.
 
 ### Abstraction
 
-The final marketplace makes use of several different high-level components that ruby on rails provide, each making development and the functionality of the app vastly faster and broad.
+The final marketplace makes use of several different high-level components that ruby on rails provide, each making development and the functionality of the app vastly faster and broader.
 
 One crucial abstraction used in my board game market place is how all my models are 
 inherited from the application record class which in turn inherits from the base class in ActiveRecord module. What this allows us to do is set a model without having to write a bunch of code to implement basic functionality such as creating a new record or updating a new record, this is all created and handled by Rails. It also allows us to connect and make changes to our database with out having to code that logic ourselves. For example:
@@ -204,13 +216,15 @@ listing = Listing.create()
 Listing.find(2)
 
 ```
+Basically ActiveRecord in itself is an abstraction of SQL.
 
 Another module we use for abstraction is the ActionView. The ActionView module handles the web request we are sent and compiles our views based on what the controller gives us. ActionViews is what handles all our views which are written in html with embedded ruby. Embedded ruby is what allows us to write ruby code among html which gives our view a wider functionality such as loops and conditionals. ActionViews also provides us with a bunch of helper methods such as form_with. These methods allow us to much easier display or request data through our views from our controller. All these functionality is possible thanks to abstraction through ActionView.
 
+Action Controller is the third module we most commonly use in a Ruby on rails project. The Action Controller handles the C part of MVC and gives us as a developer a bunch of handy tools that allows us makes the development of apps faster. One of the main purposes of the Action Controller is to handle the RESTful aspect of our applications so we don't necessarily have to worry about it. It also sets up the logic and code for us to easily communicate with our view and models from our controllers.
 
 ### Third Party Services
 
-A lot of the functionality of the market place has been implemented from various sources in order to provide a more secure and nicer user experience. Listed all the services being used in this project:
+A lot of the functionality of the market place has been implemented from various sources in order to provide a more secure and nicer user experience. Listed below are all the services being used in this project:
 
 
 - Heroku - Heroku is a web server provider where the app has been deployed and uploaded. This is the server which user request from when visiting the website.
@@ -265,22 +279,26 @@ Each morning a screenshot was taken and can be viewed below:
 #### Day 7 - Sunday 17/05/2020
 
 ![Day 7 screenshot](./docs/Screenshot_2020-05-17.png)
+
 #### Day 8 - Monday 18/05/2020
 
 ![Day 8 screenshot](./docs/Screenshot_2020-05-18.png)
 
-#### Day 9 - Monday 19/05/2020
+#### Day 9 - Tuesday 19/05/2020
 
 ![Day 9 screenshot](./docs/Screenshot_2020-05-19.png)
 
-#### Day 10 - Monday 20/05/2020
+#### Day 10 - Wednesday 20/05/2020
 
 ![Day 10 screenshot](./docs/Screenshot_2020-05-20.png)
 
-#### Day 11- Monday 21/05/2020
+#### Day 11- Thursday 21/05/2020
 
 ![Day 11 screenshot](./docs/Screenshot_2020-05-21.png)
 
+#### Day 11- Thursday 21/05/2020 -FINAL
+
+![Day 11 final screenshot](./docs/Final-trello.jpg)
 
 ## End Product
 
@@ -303,18 +321,45 @@ The final application has the following features
 - Profile Creation - Users can make a profile with a username and profile pic
 - Rating system - Users can rate their transactions to better get an understanding of legitimate sellers
 - User Dashboard - Users can get an overview of their past transactions and current and former listings.
+- Admin Dashboard - A comprehensive dashboard has been implemented for admin to monitor the data of the website
 
 ### Sitemap
 
-TODO
+The final product sitemap.
+
+![sitemap](./docs/sitemap.png)
 
 ### Screenshots
 
-TODO
+These are screenshots of the final product
+
+#### Listings/home Page
+
+![Listings](./docs/final-listings.png)
+
+#### Listing Show Page
+
+![Listing](./docs/final-showing-listing.png)
+
+#### User Dashboard
+
+![User Dashboard](./docs/final-dashboard.png)
+
+#### Conversations
+
+![Conversations](./docs/final-conversations.png)
+
+#### Chat
+
+![Chat](./docs/final-chat.png)
+
+#### Transaction
+
+![Transaction](./docs/final-transaction.png)
 
 ### Target audience
 
-The target audience for this app is particularly people who are interested in buying and selling boardgames. Mainly targeted towards Australian but could be used by people around the world.
+The target audience for this app is particularly people who are interested in buying and selling boardgames. Mainly targeted towards Australians but could be used by people around the world.
 
 ### Tech stack (e.g. html, css, deployment platform, etc)
 
@@ -333,95 +378,3 @@ Many different technologies was used to make this project and are listed below:
 - Services
   - AWS S3 Bucket
   - Stripe
-
-
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-## Explain the different high-level components (abstraction)
-
-- Describe the inheritance in the application
-- ModeApplicationRecord <- ActiveRecord
-
-One example of high level components in my rails app is Active Record. Active record is a module with the Base class inside of it that gives our models methods that allows us to manipulate our data.
-
-Essentially, active record can be called on our models to create, read, update and delete. IN the background it's executing SQl that does this record manipulation
-
----
-Active Storage is a module that allows me to upload files in a simple manner.
-
-Action View
-
-ERB
-
-Difference between Template Review and Partials
-
-Do 3 abstractions 2 paragraphs each about as long as above.
-
-## Code comments
-
-This action returns all of the listing records and sends them to the index vies
-
-def index
-    Listing.all
-end
-
-```Ruby
-# Load every game and its publishers username
-# only load active games
-
-games = []
-list = Game.with_attached_images.includes{publisher: [:user]}.select { |game| game.active == true }
-
-```
-## Q19 and Q14 combine
-
-Schema requirements
-
-You must have:
-
-1.  A screenshot of your ERD from dbdiagram
-2.  Text for how you created the dbdiagram
-3.  Discuss why you
-
-Slides Important that the app that is deployed to heroku is the app being demoed.
-
-
-# BUGS
-
-Heroku
-- cant create profile
-- messages visible when creating profile
-- pay with card does nothing when not logged in
-- paying with card doesn't show correct transaction
-
-
-PAPPA TYCKER
-
-Listing ska va home
-
-Ska sta sell och price
-
-
-
